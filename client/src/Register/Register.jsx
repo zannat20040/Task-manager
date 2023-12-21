@@ -3,8 +3,26 @@ import bgImg from "../assets/rm222batch3-mind-03.jpg";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
+import { imgUpload } from "../Hooks/ImgUpload";
 
 const Register = () => {
+
+  const HandleSignup = async(e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+   const image = form.photo.files[0];
+    const photo = await imgUpload(image)    
+
+    console.log(name, email, password, photo);
+
+ 
+  };
+
+
   return (
     <>
       <div className="">
@@ -39,7 +57,7 @@ const Register = () => {
               style={{ backgroundImage: `url(${bgImg})` }}
             >
               <div className="card w-full">
-                <RegisterForm></RegisterForm>
+                <RegisterForm HandleSignup={HandleSignup}></RegisterForm>
               </div>
             </div>
           </div>

@@ -5,6 +5,18 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+
+  const HandleLogin = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+console.log(email, password)
+    
+  };
+
+
   return (
     <>
       <div className="">
@@ -15,7 +27,7 @@ const Login = () => {
               style={{ backgroundImage: `url(${bgImg})` }}
             >
               <div className="card w-full">
-                <LoginForm></LoginForm>
+                <LoginForm HandleLogin={HandleLogin}></LoginForm>
               </div>
             </div>
           </div>

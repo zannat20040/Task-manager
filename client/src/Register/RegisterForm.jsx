@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaGooglePlusG } from "react-icons/fa6";
 
-const RegisterForm = () => {
+const RegisterForm = ({HandleSignup}) => {
   return (
     //     <form className="  card-body p-2" >
     //     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -63,7 +63,8 @@ const RegisterForm = () => {
     //     </div>
     //   </form>
 
-    <form className="w-2/3 mx-auto text-center">
+  <div className="w-2/3 mx-auto text-center">
+      <div>
       <h1 className="text-5xl font-bold text-cyan-400">Create Account</h1>
       <div className="w-40 h-1 bg-cyan-400 mt-3 rounded-badge mx-auto"></div>
 
@@ -81,7 +82,9 @@ const RegisterForm = () => {
           <FaGithub className="p-1 text-4xl" />
         </button>
       </div>
-
+    </div>
+    <form onSubmit={HandleSignup}>
+    
       <p className="my-5 text-gray-400">Or, use your email for registration</p>
 
       <div className="flex gap-2 flex-col">
@@ -98,7 +101,6 @@ const RegisterForm = () => {
         <div className="form-control">
           <input
             type="file"
-            placeholder="photo url"
             required
             name="photo"
             accept="image/*"
@@ -132,6 +134,7 @@ const RegisterForm = () => {
         </button>
       </div>
     </form>
+  </div>
   );
 };
 

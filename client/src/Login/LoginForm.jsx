@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaGooglePlusG } from "react-icons/fa6";
 
-const LoginForm = () => {
+const LoginForm = ({HandleLogin}) => {
   return (
-    <>
-      <form className="w-2/3 mx-auto">
-        <h1 className="text-5xl font-bold text-cyan-400">Sign in to Account</h1>
+    <div className="w-2/3 mx-auto">
+       <div>
+    <h1 className="text-5xl font-bold text-cyan-400">Sign in to Account</h1>
         <div className="w-40 h-1 bg-cyan-400 mt-3 rounded-badge"></div>
 
         <div className="flex gap-2 my-5">
@@ -26,6 +26,9 @@ const LoginForm = () => {
 
         <p className="my-5 text-gray-400">Or, use your email account </p>
 
+    </div>
+      <form onSubmit={HandleLogin}>
+       
         <div className="form-control">
           <input
             type="email"
@@ -52,8 +55,7 @@ const LoginForm = () => {
           </button>
         </div>
       </form>
-     
-    </>
+    </div>
   );
 };
 
