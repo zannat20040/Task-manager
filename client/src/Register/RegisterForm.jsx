@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaGooglePlusG } from "react-icons/fa6";
 
-const RegisterForm = ({HandleSignup}) => {
+const RegisterForm = ({HandleSignup, HandleGoogleSignin}) => {
   return (
     //     <form className="  card-body p-2" >
     //     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -71,7 +71,7 @@ const RegisterForm = ({HandleSignup}) => {
       <div className="flex gap-2 my-5 justify-center">
         <button
           className="text-lg rounded-full text-cyan-400 border-cyan-400 border w-10 h-10 hover:text-white hover:bg-cyan-400 flex justify-center items-center transition-all"
-          //   onClick={HandleGoogleSignin}
+            onClick={HandleGoogleSignin}
         >
           <FaGooglePlusG className="p-1 text-4xl" />
         </button>

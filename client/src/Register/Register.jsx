@@ -47,6 +47,17 @@ const Register = () => {
 
   };
 
+  
+  const HandleGoogleSignin = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result)
+        swal("Good job!", "Logged in successfully!", "success");
+      })
+      .catch((error) => {
+        swal("Opps!", error , "error");
+      });
+  };
 
   return (
     <>
@@ -82,7 +93,7 @@ const Register = () => {
               style={{ backgroundImage: `url(${bgImg})` }}
             >
               <div className="card w-full">
-                <RegisterForm HandleSignup={HandleSignup}></RegisterForm>
+                <RegisterForm HandleSignup={HandleSignup} HandleGoogleSignin={HandleGoogleSignin}></RegisterForm>
               </div>
             </div>
           </div>

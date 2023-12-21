@@ -26,6 +26,16 @@ console.log(email, password)
       });
   };
 
+  const HandleGoogleSignin = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result)
+        swal("Good job!", "Logged in successfully!", "success");
+      })
+      .catch((error) => {
+        swal("Opps!", error , "error");
+      });
+  };
 
   return (
     <>
@@ -37,7 +47,7 @@ console.log(email, password)
               style={{ backgroundImage: `url(${bgImg})` }}
             >
               <div className="card w-full">
-                <LoginForm HandleLogin={HandleLogin}></LoginForm>
+                <LoginForm HandleLogin={HandleLogin} HandleGoogleSignin={HandleGoogleSignin}></LoginForm>
               </div>
             </div>
           </div>
@@ -46,7 +56,7 @@ console.log(email, password)
               <Link to="/">
                 <button
                   className="text-lg rounded-full bg-white text-cyan-400 border-cyan-400 border w-12 h-12 hover:text-cyan-400 hover:bg-black flex justify-center items-center transition-all"
-                  //   onClick={HandleGoogleSignin}
+                  
                 >
                   <FaLongArrowAltRight className="p-1 text-3xl" />
                 </button>
