@@ -8,7 +8,7 @@ const ResponsiveNavbar = () => {
         <NavLink to='/'
           style={({ isActive, isPending }) => {
             return {
-              color: isActive ? "red" : "inherit",
+              color: isActive ? "active" : "pending",
             };
           }}
           className={({ isActive, isPending }) => {
@@ -23,7 +23,7 @@ const ResponsiveNavbar = () => {
         <NavLink to='/dashboard'
           style={({ isActive, isPending }) => {
             return {
-              color: isActive ? "" : "",
+              color: isActive ? "active" : "pending",
             };
           }}
           className={({ isActive, isPending }) => {
@@ -38,7 +38,7 @@ const ResponsiveNavbar = () => {
         <NavLink to='/help'
           style={({ isActive, isPending }) => {
             return {
-              color: isActive ? "" : "",
+              color: isActive ? "active" : "pending",
             };
           }}
           className={({ isActive, isPending }) => {
@@ -52,7 +52,7 @@ const ResponsiveNavbar = () => {
         <NavLink to='/login'
           style={({ isActive, isPending }) => {
             return {
-              color: isActive ? "red" : "inherit",
+              color: isActive ? "active" : "pending",
             };
           }}
           className={({ isActive, isPending }) => {
@@ -92,7 +92,7 @@ const ResponsiveNavbar = () => {
               {navList}
             </ul>
           </div>
-          <a className="text-2xl font-bold text-teal-500">
+          <a className="text-3xl font-bold text-cyan-400">
             Task Manager
           </a>
         </div>
