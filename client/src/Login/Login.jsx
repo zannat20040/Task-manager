@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 
 const Login = () => {
-  const { loginWithPass, googleSignIn } = useContext(AuthContext);
+  const { loginWithPass, googleSignIn, githubSignIn } = useContext(AuthContext);
 
   const HandleLogin = (e) => {
     e.preventDefault();
@@ -14,26 +14,36 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-console.log(email, password)
+    console.log(email, password);
     loginWithPass(email, password)
       .then((userCredential) => {
         swal("Good job!", "Logged in successfully!", "success");
-        console.log(userCredential.user)       
-
+        console.log(userCredential.user);
       })
       .catch((error) => {
-        swal("Opps!", error.message , "error");
+        swal("Opps!", error.message, "error");
       });
   };
 
   const HandleGoogleSignin = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result)
+        console.log(result);
         swal("Good job!", "Logged in successfully!", "success");
       })
       .catch((error) => {
-        swal("Opps!", error , "error");
+        swal("Opps!", error, "error");
+      });
+  };
+
+  const HandleGithubSignin = () => {
+    githubSignIn()
+      .then((result) => {
+        console.log(result);
+        swal("Good job!", "Logged in successfully!", "success");
+      })
+      .catch((error) => {
+        swal("Opps!", error, "error");
       });
   };
 
@@ -47,17 +57,18 @@ console.log(email, password)
               style={{ backgroundImage: `url(${bgImg})` }}
             >
               <div className="card w-full">
-                <LoginForm HandleLogin={HandleLogin} HandleGoogleSignin={HandleGoogleSignin}></LoginForm>
+                <LoginForm
+                  HandleLogin={HandleLogin}
+                  HandleGithubSignin={HandleGithubSignin}
+                  HandleGoogleSignin={HandleGoogleSignin}
+                ></LoginForm>
               </div>
             </div>
           </div>
           <div className="text-center  lg:text-left  flex-1 bg-cyan-400">
             <div className=" fixed  right-0  p-5">
               <Link to="/">
-                <button
-                  className="text-lg rounded-full bg-white text-cyan-400 border-cyan-400 border w-12 h-12 hover:text-cyan-400 hover:bg-black flex justify-center items-center transition-all"
-                  
-                >
+                <button className="text-lg rounded-full bg-white text-cyan-400 border-cyan-400 border w-12 h-12 hover:text-cyan-400 hover:bg-black flex justify-center items-center transition-all">
                   <FaLongArrowAltRight className="p-1 text-3xl" />
                 </button>
               </Link>
@@ -68,7 +79,7 @@ console.log(email, password)
               <p className="py-6 text-center">
                 Fillup your personal information & start journey with us
               </p>
-              <Link to='/signin'>
+              <Link to="/signin">
                 <button className="btn btn-outline rounded-badge btn-wide">
                   Register Now
                 </button>

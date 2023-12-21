@@ -8,54 +8,60 @@ import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 import swal from "sweetalert";
 import { updateProfile } from "firebase/auth";
 
-
 const Register = () => {
-  const { createWithPass , googleSignIn} = useContext(AuthContext);
+  const { createWithPass, googleSignIn,githubSignIn } = useContext(AuthContext);
 
-  const HandleSignup = async(e) => {
+  const HandleSignup = async (e) => {
     e.preventDefault();
 
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-   const image = form.photo.files[0];
-    const photo = await imgUpload(image)    
+    const image = form.photo.files[0];
+    const photo = await imgUpload(image);
 
     console.log(name, email, password, photo);
 
     createWithPass(email, password)
       .then((userCredential) => {
-        const user = userCredential.user
+        const user = userCredential.user;
         swal("Good job!", "Signed up successfully!", "success");
-        console.log(user)
+        console.log(user);
 
-        updateProfile(user ,{
+        updateProfile(user, {
           displayName: name,
-          photoURL: photo
+          photoURL: photo,
         })
-          .then(() => {
-          })
+          .then(() => {})
           .catch((error) => {
             console.log(error);
           });
-
       })
       .catch((error) => {
-        swal("Opps!", error.message , "error");
+        swal("Opps!", error.message, "error");
       });
-
   };
 
-  
   const HandleGoogleSignin = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result)
+        console.log(result);
         swal("Good job!", "Logged in successfully!", "success");
       })
       .catch((error) => {
-        swal("Opps!", error , "error");
+        swal("Opps!", error, "error");
+      });
+  };
+
+  const HandleGithubSignin = () => {
+    githubSignIn()
+      .then((result) => {
+        console.log(result);
+        swal("Good job!", "Logged in successfully!", "success");
+      })
+      .catch((error) => {
+        swal("Opps!", error, "error");
       });
   };
 
@@ -78,7 +84,8 @@ const Register = () => {
               <h1 className="text-5xl font-bold">Welcome back!</h1>
               <div className="w-40 h-1 bg-black mt-3 rounded-badge"></div>
               <p className="py-6 text-center">
-                To keep connected with us please log in with your personal information
+                To keep connected with us please log in with your personal
+                information
               </p>
               <Link to="/login">
                 <button className="btn btn-outline rounded-badge btn-wide">
@@ -93,7 +100,11 @@ const Register = () => {
               style={{ backgroundImage: `url(${bgImg})` }}
             >
               <div className="card w-full">
-                <RegisterForm HandleSignup={HandleSignup} HandleGoogleSignin={HandleGoogleSignin}></RegisterForm>
+                <RegisterForm
+                  HandleGithubSignin={HandleGithubSignin}
+                  HandleSignup={HandleSignup}
+                  HandleGoogleSignin={HandleGoogleSignin}
+                ></RegisterForm>
               </div>
             </div>
           </div>

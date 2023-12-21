@@ -7,6 +7,7 @@ import {
   signInWithPopup,
   onAuthStateChanged,
   signOut,
+  GithubAuthProvider 
 } from "firebase/auth";
 import app from "../Firebase.config";
 
@@ -28,9 +29,14 @@ const AuthProvider = ({ children }) => {
   };
 
   const provider = new GoogleAuthProvider();
+  const gitProvider = new GithubAuthProvider();
   const googleSignIn = () => {
     setLoading(true)
     return signInWithPopup(auth, provider);
+  };
+  const githubSignIn = () => {
+    setLoading(true)
+    return signInWithPopup(auth, gitProvider);
   };
 
   const passwordSignOut = () => {
@@ -62,7 +68,8 @@ const AuthProvider = ({ children }) => {
     user,
     passwordSignOut,
     setLoading,
-    loading
+    loading,
+    githubSignIn
   };
 
   return (
