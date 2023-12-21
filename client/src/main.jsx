@@ -13,6 +13,7 @@ import Login from "./Login/Login";
 import LoginForm from "./Login/LoginForm";
 import Register from "./Register/Register";
 import AuthProvider from "./AuthProvider.jsx/AuthProvider";
+import PrivateRoute from "./Private/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,11 +26,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <div>dashbrd</div>,
+        element: <PrivateRoute><div>dashbrd</div></PrivateRoute>,
       },
       {
         path: "/help",
-        element: <div>help</div>,
+        element: <PrivateRoute><div>help</div></PrivateRoute>,
       },
     ],
   },

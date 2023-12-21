@@ -2,12 +2,15 @@ import React, { useContext } from "react";
 import LoginForm from "./LoginForm";
 import bgImg from "../assets/rm222batch3-mind-03.jpg";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 
 const Login = () => {
   const { loginWithPass, googleSignIn, githubSignIn } = useContext(AuthContext);
+  const navigate = useNavigate()
+  const location = useLocation()
 
+  
   const HandleLogin = (e) => {
     e.preventDefault();
 
@@ -19,6 +22,7 @@ const Login = () => {
       .then((userCredential) => {
         swal("Good job!", "Logged in successfully!", "success");
         console.log(userCredential.user);
+        navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
       })
       .catch((error) => {
         swal("Opps!", error.message, "error");
@@ -30,6 +34,7 @@ const Login = () => {
       .then((result) => {
         console.log(result);
         swal("Good job!", "Logged in successfully!", "success");
+        navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
       })
       .catch((error) => {
         swal("Opps!", error, "error");
@@ -41,6 +46,7 @@ const Login = () => {
       .then((result) => {
         console.log(result);
         swal("Good job!", "Logged in successfully!", "success");
+        navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
       })
       .catch((error) => {
         swal("Opps!", error, "error");
