@@ -26,7 +26,7 @@ const LoginForm = () => {
 
         <p className="my-5 text-gray-400">Or, use your email account </p>
 
-        <div className="form-control relative  group">
+        <div className="form-control">
           <input
             type="email"
             placeholder="email"
@@ -36,7 +36,7 @@ const LoginForm = () => {
           />
         </div>
 
-        <div className="form-control relative mt-5 group">
+        <div className="form-control mt-5 ">
           <input
             type="password"
             placeholder="password"
