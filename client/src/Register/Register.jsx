@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import bgImg from "../assets/rm222batch3-mind-03.jpg";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 import { imgUpload } from "../Hooks/ImgUpload";
+import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
+import swal from "sweetalert";
+import { updateProfile } from "firebase/auth";
+
 
 const Register = () => {
+  const { createWithPass , googleSignIn} = useContext(AuthContext);
 
   const HandleSignup = async(e) => {
     e.preventDefault();
@@ -19,26 +24,26 @@ const Register = () => {
 
     console.log(name, email, password, photo);
 
-    // createWithPass(email, password)
-    //   .then((userCredential) => {
-    //     const user = userCredential.user
-    //     swal("Good job!", "Signed up successfully!", "success");
-    //     // navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
+    createWithPass(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user
+        swal("Good job!", "Signed up successfully!", "success");
+        console.log(user)
 
-    //     updateProfile(user ,{
-    //       displayName: name,
-    //       photoURL: photo
-    //     })
-    //       .then(() => {
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
+        updateProfile(user ,{
+          displayName: name,
+          photoURL: photo
+        })
+          .then(() => {
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
-    //   })
-    //   .catch((error) => {
-    //     swal("Opps!", error.message , "error");
-    //   });
+      })
+      .catch((error) => {
+        swal("Opps!", error.message , "error");
+      });
 
   };
 
