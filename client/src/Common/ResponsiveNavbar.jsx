@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 
 const ResponsiveNavbar = () => {
+  const { user, passwordSignOut } = useContext(AuthContext);
+  console.log(user);
+
+  const HandleLogout = () => {
+    passwordSignOut()
+      .then(() => {
+        swal("Good job!", "Logged out successfully!", "success");
+      })
+      .catch((error) => {
+        swal("Opps!", error, "error");
+      });
+  };
+
   const navList = (
     <>
       <li>
-        <NavLink to='/'
+        <NavLink
+          to="/"
           style={({ isActive, isPending }) => {
             return {
               color: isActive ? "active" : "pending",
@@ -20,7 +35,8 @@ const ResponsiveNavbar = () => {
       </li>
 
       <li>
-        <NavLink to='/dashboard'
+        <NavLink
+          to="/dashboard"
           style={({ isActive, isPending }) => {
             return {
               color: isActive ? "active" : "pending",
@@ -34,8 +50,8 @@ const ResponsiveNavbar = () => {
         </NavLink>
       </li>
       <li>
-        {" "}
-        <NavLink to='/help'
+        <NavLink
+          to="/help"
           style={({ isActive, isPending }) => {
             return {
               color: isActive ? "active" : "pending",
@@ -49,18 +65,34 @@ const ResponsiveNavbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to='/login'
-          style={({ isActive, isPending }) => {
-            return {
-              color: isActive ? "active" : "pending",
-            };
-          }}
-          className={({ isActive, isPending }) => {
-            return isActive ? "active" : isPending ? "pending" : "";
-          }}
-        >
-          Register/Login
-        </NavLink>
+        {user ? (
+          <NavLink to='/login'
+            onClick={HandleLogout}
+            style={({ isActive, isPending }) => {
+              return {
+                color: isActive ? "active" : "pending",
+              };
+            }}
+            className={({ isActive, isPending }) => {
+              return isActive ? "active" : isPending ? "pending" : "";
+            }}
+          >
+            Logout
+          </NavLink>
+        ) : (
+          <NavLink to='/login'
+            style={({ isActive, isPending }) => {
+              return {
+                color: isActive ? "active" : "pending",
+              };
+            }}
+            className={({ isActive, isPending }) => {
+              return isActive ? "active" : isPending ? "pending" : "";
+            }}
+          >
+            Register/Login
+          </NavLink>
+        )}
       </li>
     </>
   );
@@ -90,14 +122,76 @@ const ResponsiveNavbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               {navList}
+              {/* <li>
+                {user ? (
+                  <NavLink
+                    to="/login"
+                    style={({ isActive, isPending }) => {
+                      return {
+                        color: isActive ? "active" : "pending",
+                      };
+                    }}
+                    className={({ isActive, isPending }) => {
+                      return isActive ? "active" : isPending ? "pending" : "";
+                    }}
+                  >
+                    Logout
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    to=""
+                    style={({ isActive, isPending }) => {
+                      return {
+                        color: isActive ? "active" : "pending",
+                      };
+                    }}
+                    className={({ isActive, isPending }) => {
+                      return isActive ? "active" : isPending ? "pending" : "";
+                    }}
+                  >
+                    Register/Login
+                  </NavLink>
+                )}
+              </li> */}
             </ul>
           </div>
-          <a className="text-3xl font-bold text-cyan-400">
-            Task Manager
-          </a>
+          <a className="text-3xl font-bold text-cyan-400">Task Manager</a>
         </div>
         <div className="navbar-end hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navList}</ul>
+          <ul className="menu menu-horizontal px-1">
+            {navList}
+            {/* <li>
+              {user ? (
+                <NavLink
+                  to="/login"
+                  style={({ isActive, isPending }) => {
+                    return {
+                      color: isActive ? "active" : "pending",
+                    };
+                  }}
+                  className={({ isActive, isPending }) => {
+                    return isActive ? "active" : isPending ? "pending" : "";
+                  }}
+                >
+                  Logout 
+                </NavLink>
+              ) : (
+                <NavLink
+                  to=""
+                  style={({ isActive, isPending }) => {
+                    return {
+                      color: isActive ? "active" : "pending",
+                    };
+                  }}
+                  className={({ isActive, isPending }) => {
+                    return isActive ? "active" : isPending ? "pending" : "";
+                  }}
+                >
+                  Register/Login
+                </NavLink>
+              )}
+            </li> */}
+          </ul>
         </div>
       </div>
     </div>
