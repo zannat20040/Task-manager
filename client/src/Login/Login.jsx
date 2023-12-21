@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoginForm from "./LoginForm";
 import bgImg from "../assets/rm222batch3-mind-03.jpg";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 
 const Login = () => {
+  const { loginWithPass, googleSignIn } = useContext(AuthContext);
 
   const HandleLogin = (e) => {
     e.preventDefault();
@@ -13,25 +15,15 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 console.log(email, password)
-    // loginWithPass(email, password)
-    //   .then((userCredential) => {
-    //     swal("Good job!", "Logged in successfully!", "success");
+    loginWithPass(email, password)
+      .then((userCredential) => {
+        swal("Good job!", "Logged in successfully!", "success");
+        console.log(userCredential.user)       
 
-    //     // axios.post('http://localhost:5000/jwt',{email}, {withCredentials:true})
-    //   //   axios.post('https://server-side-taupe.vercel.app/jwt',{email}, {withCredentials:true})
-    //   //  .then(res=>{
-    //   //   console.log(res.data)
-    //   //  })
-    //   //  .catch(error=>{
-    //   //   console.log(error)
-    //   //  })
-       
-    //   navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
-
-    //   })
-    //   .catch((error) => {
-    //     swal("Opps!", error.message , "error");
-    //   });
+      })
+      .catch((error) => {
+        swal("Opps!", error.message , "error");
+      });
   };
 
 
