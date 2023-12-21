@@ -13,7 +13,25 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 console.log(email, password)
-    
+    // loginWithPass(email, password)
+    //   .then((userCredential) => {
+    //     swal("Good job!", "Logged in successfully!", "success");
+
+    //     // axios.post('http://localhost:5000/jwt',{email}, {withCredentials:true})
+    //   //   axios.post('https://server-side-taupe.vercel.app/jwt',{email}, {withCredentials:true})
+    //   //  .then(res=>{
+    //   //   console.log(res.data)
+    //   //  })
+    //   //  .catch(error=>{
+    //   //   console.log(error)
+    //   //  })
+       
+    //   navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
+
+    //   })
+    //   .catch((error) => {
+    //     swal("Opps!", error.message , "error");
+    //   });
   };
 
 

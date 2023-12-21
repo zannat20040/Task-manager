@@ -19,7 +19,27 @@ const Register = () => {
 
     console.log(name, email, password, photo);
 
- 
+    // createWithPass(email, password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user
+    //     swal("Good job!", "Signed up successfully!", "success");
+    //     // navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
+
+    //     updateProfile(user ,{
+    //       displayName: name,
+    //       photoURL: photo
+    //     })
+    //       .then(() => {
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+
+    //   })
+    //   .catch((error) => {
+    //     swal("Opps!", error.message , "error");
+    //   });
+
   };
 
 
