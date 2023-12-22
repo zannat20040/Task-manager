@@ -30,7 +30,28 @@ async function run() {
       res.send(result)
     })
 
-    
+    app.get('/addTask', async (req, res) => {
+      const email = req.query.email
+      const query = { email: email }
+      const result = await taskCollection.find(query).toArray();
+      res.send(result)
+    })
+
+    app.patch('/addTask/:id', async (req, res) => {
+      const id = req.params.id;
+      const data = req.body
+      const query = { _id: new ObjectId(id) };
+      const updateStatus = {
+        $set: {
+          status: data.status,
+        }
+      }
+      console.log(id, data, updateStatus)
+      const result = await taskCollection.updateOne(query, updateStatus);
+      res.send(result)
+      console.log(result)
+    })
+
 
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
