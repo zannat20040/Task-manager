@@ -19,22 +19,23 @@ const Stat = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h2 className="card-title text-4xl block text-center mb-10">
+      <h2 className="card-title text-4xl block text-center mb-3">
         Meet Our <span className="text-cyan-400  "> User</span> Community
       </h2>
+      <div className="w-40 h-1 bg-cyan-400 mb-10 rounded-badge mx-auto"></div>
 
       <Swiper
         slidesPerView={4}
         spaceBetween={20}
-        pagination={{
-          clickable: true,
-        }}
+        // pagination={{
+        //   clickable: true,
+        // }}
         modules={[Pagination]}
         className="mySwiper"
       >
-      {userStatistics.map((item) => (
+      {userStatistics.map((item,index) => (
             <SwiperSlide>
-              <div className="card shadow-md rounded-md h-max bg-cyan-400 text-center">
+              <div key={index} className="card shadow-md rounded-md h-max bg-cyan-400 text-center">
                 <div className="card-body justify-center items-center">
                   <h2 className="card-title text-5xl  font-semibold">{item.users}k</h2>
                   <p className="capitalize  ">{item.type}</p>
