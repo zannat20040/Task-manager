@@ -20,7 +20,7 @@
   font-size: 16px !important;
   font-weight: 600 !important;
 
-  border-bottom: 3px solid rgb(34, 211, 238) !important;
+  border-bottom: 3px solid #22d3ee !important;
 }
 
 
@@ -34,7 +34,6 @@
 
 .sidemenu a {
   transition: .5s;
-  color: white !important;
   font-weight: 600 !important;
   border-radius: 0 !important;
   padding-left: 20px !important;
@@ -53,7 +52,7 @@
 
 
 .sidemenu li:hover a {
-  border: none !important;
+  border: 1px solid  #22d3ee !important;
   border-radius: 0 !important;
   background-color: white !important;
   color: black !important;

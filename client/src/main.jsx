@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import { Toaster } from 'react-hot-toast';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -16,6 +17,13 @@ import AuthProvider from "./AuthProvider.jsx/AuthProvider";
 import PrivateRoute from "./Private/PrivateRoute";
 import DashBoard from "./Dashboard/DashBoard";
 import CreateTask from "./Dashboard/CreateTask";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -26,10 +34,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
-      
+
       {
         path: "/help",
-        element: <PrivateRoute><div>help</div></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <div>help</div>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -43,8 +55,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
-    children:[
+    element: (
+      <PrivateRoute>
+        <DashBoard></DashBoard>
+      </PrivateRoute>
+    ),
+    children: [
       {
         path: "create",
         element: <CreateTask></CreateTask>,
@@ -52,15 +68,18 @@ const router = createBrowserRouter([
       {
         path: "manage",
         element: <Login></Login>,
-      }
-    ]
+      },
+    ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <Toaster />
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>
 );

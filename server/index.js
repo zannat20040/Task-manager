@@ -7,8 +7,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.j7hulja.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xtkjyfm.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -26,14 +25,30 @@ async function run() {
 
 
     app.post('/addTask', async (req, res) => {
-        const job = req.body
-        const result = await taskCollection.insertOne(job);
-        res.send(result)
-      })
+      const task = req.body
+      const result = await taskCollection.insertOne(task);
+      res.send(result)
+    })
+
+    app.get('/addTask', async (req, res) => {
+      const email = req.query.email
+      const query = { email: email }
+      const result = await taskCollection.find(query).toArray();
+      res.send(result)
+  })
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
   }
 }
+
 run().catch(console.dir);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 

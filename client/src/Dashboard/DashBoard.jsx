@@ -43,14 +43,14 @@ const DashBoard = () => {
         </div>
         <Outlet></Outlet>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side shadow-2xl">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
 
-        <div className="bg-slate-950 min-h-full  w-72 pt-5">
+        <div className=" bg-white z-50  min-h-full w-72 pt-5">
           <a className=" block text-2xl mx-5 mb-10 text-center  font-semibold rounded-badge text-black bg-cyan-400 py-4 px-2 ">
             Task Manager
           </a>

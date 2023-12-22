@@ -32,7 +32,6 @@ const ResponsiveNavbar = () => {
           Home
         </NavLink>
       </li>
-
       <li>
         <NavLink
           to="/dashboard"
@@ -121,75 +120,15 @@ const ResponsiveNavbar = () => {
               className="navmenu menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               {navList}
-              {/* <li>
-                {user ? (
-                  <NavLink
-                    to="/login"
-                    style={({ isActive, isPending }) => {
-                      return {
-                        color: isActive ? "active" : "pending",
-                      };
-                    }}
-                    className={({ isActive, isPending }) => {
-                      return isActive ? "active" : isPending ? "pending" : "";
-                    }}
-                  >
-                    Logout
-                  </NavLink>
-                ) : (
-                  <NavLink
-                    to=""
-                    style={({ isActive, isPending }) => {
-                      return {
-                        color: isActive ? "active" : "pending",
-                      };
-                    }}
-                    className={({ isActive, isPending }) => {
-                      return isActive ? "active" : isPending ? "pending" : "";
-                    }}
-                  >
-                    Register/Login
-                  </NavLink>
-                )}
-              </li> */}
+          
             </ul>
           </div>
           <a className="text-3xl font-bold text-cyan-400">Task Manager</a>
         </div>
         <div className="navbar-end hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu navmenu menu-horizontal px-1">
             {navList}
-            {/* <li>
-              {user ? (
-                <NavLink
-                  to="/login"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      color: isActive ? "active" : "pending",
-                    };
-                  }}
-                  className={({ isActive, isPending }) => {
-                    return isActive ? "active" : isPending ? "pending" : "";
-                  }}
-                >
-                  Logout 
-                </NavLink>
-              ) : (
-                <NavLink
-                  to=""
-                  style={({ isActive, isPending }) => {
-                    return {
-                      color: isActive ? "active" : "pending",
-                    };
-                  }}
-                  className={({ isActive, isPending }) => {
-                    return isActive ? "active" : isPending ? "pending" : "";
-                  }}
-                >
-                  Register/Login
-                </NavLink>
-              )}
-            </li> */}
+           
           </ul>
         </div>
       </div>
