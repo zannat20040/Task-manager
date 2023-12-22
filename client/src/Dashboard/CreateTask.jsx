@@ -4,6 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 import axios from "axios";
+import { FaCircle } from "react-icons/fa";
+import { FiEdit2 } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
+import DragableTask from "./DragableTask";
 
 const CreateTask = () => {
   const { user } = useContext(AuthContext);
@@ -26,6 +30,34 @@ const CreateTask = () => {
       });
   };
 
+  const HandleDelete = (id) => {
+    console.log("delete");
+    console.log(id);
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this task!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios.delete(`http://localhost:5000/addTask/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.deletedCount > 0) {
+            refetch();
+            swal("Good job!", "Task has been deleted", "success");
+          }
+        });
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
+  };
+
+  const HandleEdit = () => {
+    console.log("edit");
+  };
+
   const {
     data: allTask,
     refetch,
@@ -42,13 +74,26 @@ const CreateTask = () => {
 
   return (
     <div className=" px-4 mt-5 ">
-      <h1 className="bg-cyan-400 py-4 px-10 mb-2 rounded-e-badge w-1/2 font-medium ">
-        Today's Task
-      </h1>
+      <div className="grid grid-cols-2 gap-2 justify-between items-center">
+        <h1 className="bg-cyan-400 py-4 px-10 mb-2 rounded-e-badge w-1/2 font-medium ">
+          Today's Task
+        </h1>
+        <div className="flex gap-2 justify-end ">
+          <h1 className="flex gap-1 items-center text-cyan-400 ">
+            High <FaCircle className="text-green-300" />
+          </h1>
+          <h1 className="flex gap-1 items-center text-cyan-400  ">
+            Modarate <FaCircle className="text-yellow-300" />
+          </h1>
+          <h1 className="flex gap-1 items-center text-cyan-400 ">
+            Low <FaCircle className="text-red-300" />
+          </h1>
+        </div>
+      </div>
       <div className="grid grid-cols-3  gap-4 justify-between ">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className=" col-span-2 h-fit bg-cyan-300 rounded-lg  shadow-lg p-14 flex flex-col gap-2 "
+          className=" col-span-2 h-fit bg-cyan-300 rounded  shadow-lg p-14 flex flex-col gap-2 "
         >
           <input
             {...register("title", { required: true })}
@@ -92,43 +137,17 @@ const CreateTask = () => {
         </form>
         <div className="shadow-xl rounded">
           <h1 className="rounded-t bg-cyan-300 py-4 text-center px-4 font-medium ">
-            Previous Task
+            Previous Added Task
           </h1>
           <div className="grid grid-cols-1 gap-2 my-4 px-4 overflow-y-scroll h-96 ">
             {allTask?.map((task) => (
-             <div className={`card ${task.priority=='low'? 'bg-red-300': task.priority=='modarate'? 'bg-yellow-200' : 'bg-green-300'} rounded`}>
-             <div className="card-body p-5">
-               <div className="flex justify-between gap-3 flex-wrap">
-               <h2 className="card-title capitalize">{task.title}</h2>
-                 <div className="w-2/5 px-2">
-                   {task?.priority == "low" && (
-                     <p className="bg-red-500 w-full rounded-badge text-center capitalize  text-white text-sm">
-                       {task?.priority}
-                     </p>
-                   )}
-                   {task?.priority == "modarate" && (
-                     <p className="bg-yellow-500 w-full rounded-badge text-center capitalize  text-white text-sm">
-                       {task?.priority}
-                     </p>
-                   )}
-                   {task?.priority == "high" && (
-                     <p className="bg-green-500 w-full rounded-badge text-center capitalize  text-white text-sm">
-                       {task?.priority}
-                     </p>
-                   )}
-                 </div>
-               </div>
-               <p>{task.description}</p>
-
-               <div className="card-actions justify-between">
-                 <div>Deadline: {task.date}</div>
-                 <div>
-                   {task.time} {parseInt(task.time) >= 12 ? "pm" : "am"}
-                 </div>
-               </div>
-             </div>
-           </div>
-              
+              <div className={`card rounded`}>
+                <DragableTask
+                  task={task}
+                  key={task.id}
+                  refetch={refetch}
+                ></DragableTask>
+              </div>
             ))}
           </div>
         </div>

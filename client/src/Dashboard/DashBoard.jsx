@@ -38,7 +38,7 @@ const DashBoard = () => {
             </svg>
           </label>
           <div className="">
-            <a className="text-base mr-3">{user?.displayName}</a>
+            <a className="text-base mr-3 text-cyan-300">{user?.displayName}</a>
             <div
               tabIndex={0}
               role="button"

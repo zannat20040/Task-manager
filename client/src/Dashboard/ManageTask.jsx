@@ -58,7 +58,7 @@ const ManageTask = () => {
         })
         .then((res) => {
           if (res.data.modifiedCount > 0) {
-        refetch()
+            refetch();
           }
         })
         .catch((err) => {
@@ -93,6 +93,7 @@ const ManageTask = () => {
             <DragableTask
               task={task}
               key={task.id}
+              refetch={refetch}
               // addItemTo={task}
             ></DragableTask>
           ))}
