@@ -21,7 +21,6 @@ const Login = () => {
     loginWithPass(email, password)
       .then((userCredential) => {
         swal("Good job!", "Logged in successfully!", "success");
-        console.log(userCredential.user);
         navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
       })
       .catch((error) => {

@@ -15,6 +15,7 @@ import Register from "./Register/Register";
 import AuthProvider from "./AuthProvider.jsx/AuthProvider";
 import PrivateRoute from "./Private/PrivateRoute";
 import DashBoard from "./Dashboard/DashBoard";
+import CreateTask from "./Dashboard/CreateTask";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
     children:[
       {
         path: "create",
-        element: <Register></Register>,
+        element: <CreateTask></CreateTask>,
       },
       {
         path: "manage",

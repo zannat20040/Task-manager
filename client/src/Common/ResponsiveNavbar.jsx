@@ -4,7 +4,6 @@ import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 
 const ResponsiveNavbar = () => {
   const { user, passwordSignOut } = useContext(AuthContext);
-  console.log(user);
 
   const HandleLogout = () => {
     passwordSignOut()

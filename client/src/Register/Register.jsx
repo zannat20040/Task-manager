@@ -21,13 +21,10 @@ const Register = () => {
     const image = form.photo.files[0];
     const photo = await imgUpload(image);
 
-    console.log(name, email, password, photo);
-
     createWithPass(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         swal("Good job!", "Signed up successfully!", "success");
-        console.log(user);
 
         updateProfile(user, {
           displayName: name,

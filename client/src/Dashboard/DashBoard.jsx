@@ -4,12 +4,11 @@ import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center">
-        <div className="navbar flex justify-between bg-base-100">
+      <div className="drawer-content flex  flex-col ">
+        <div className="navbar shadow-lg flex justify-between md:justify-end bg-base-100 sticky top-0 z-30">
           <label
             htmlFor="my-drawer-2"
             className="btn bg-cyan-400  drawer-button lg:hidden"
