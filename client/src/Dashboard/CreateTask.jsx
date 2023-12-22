@@ -10,7 +10,7 @@ const CreateTask = () => {
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    const task = { ...data, email: user?.email, status: "to-do" };
+    const task = { ...data, email: user?.email, status: "To-Do" };
     console.log(task);
     axios
       .post("http://localhost:5000/addTask", task)

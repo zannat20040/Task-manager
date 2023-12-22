@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -22,7 +22,9 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
-
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import ManageTask from "./Dashboard/ManageTask";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -67,7 +69,7 @@ const router = createBrowserRouter([
       },
       {
         path: "manage",
-        element: <Login></Login>,
+        element: <ManageTask></ManageTask>,
       },
     ],
   },
@@ -75,11 +77,13 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <Toaster />
-      </QueryClientProvider>
-    </AuthProvider>
+    <DndProvider backend={HTML5Backend}>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <Toaster />
+        </QueryClientProvider>
+      </AuthProvider>
+    </DndProvider>
   </React.StrictMode>
 );
