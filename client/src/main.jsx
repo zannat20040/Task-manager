@@ -14,6 +14,7 @@ import LoginForm from "./Login/LoginForm";
 import Register from "./Register/Register";
 import AuthProvider from "./AuthProvider.jsx/AuthProvider";
 import PrivateRoute from "./Private/PrivateRoute";
+import DashBoard from "./Dashboard/DashBoard";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><div>dashbrd</div></PrivateRoute>,
+    element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
+    children:[
+      {
+        path: "create",
+        element: <Register></Register>,
+      },
+      {
+        path: "manage",
+        element: <Login></Login>,
+      }
+    ]
   },
 ]);
 

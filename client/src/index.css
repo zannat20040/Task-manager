@@ -6,21 +6,58 @@
   font-family: 'Maven Pro', sans-serif;
 }
 
-.active{
-  color: rgb(34 ,211 ,238)!important;
-  background-color: transparent!important;
-  border-radius: 0;
-  border-bottom: 3px solid rgb(34 ,211 ,238)!important;
-}
-
-.pending{
-  font-size: 16px!important;
+.navmenu a {
+  font-size: 16px !important;
   transition: 1s ease-out;
-}
-ul li:hover a{
-  border: none!important;
-  border-radius: 0!important;
-  background-color: transparent!important;
-  border-bottom: 3px solid rgb(34 ,211 ,238)!important;
+  font-weight: 600 !important;
 
+}
+
+.navmenu .active {
+  color: rgb(34, 211, 238) !important;
+  background-color: transparent !important;
+  border-radius: 0;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+
+  border-bottom: 3px solid rgb(34, 211, 238) !important;
+}
+
+
+.navmenu li:hover a {
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  border-bottom: 3px solid rgb(34, 211, 238) !important;
+
+}
+
+.sidemenu a {
+  transition: .5s;
+  color: white !important;
+  font-weight: 600 !important;
+  border-radius: 0 !important;
+  padding-left: 20px !important;
+}
+
+.sidemenu .active {
+  color: black !important;
+  background-color: rgb(34, 211, 238) !important;
+  border-radius: 0 !important;
+  text-align: center !important;
+  padding-left: 20px !important;
+  border-start-end-radius: var(--rounded-badge, 1.9rem) !important;
+  border-end-end-radius: var(--rounded-badge, 1.9rem) !important;
+  font-weight: 600 !important;
+}
+
+
+.sidemenu li:hover a {
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: white !important;
+  color: black !important;
+  border-start-end-radius: var(--rounded-badge, 1.9rem) !important;
+  border-end-end-radius: var(--rounded-badge, 1.9rem) !important;
+  font-weight: 600 !important;
 }
