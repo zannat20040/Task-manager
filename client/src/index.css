@@ -9,7 +9,7 @@
 .navmenu a {
   font-size: 16px !important;
   transition: 1s ease-out;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 
 }
 
@@ -19,7 +19,6 @@
   border-radius: 0;
   font-size: 16px !important;
   font-weight: 600 !important;
-
   border-bottom: 3px solid #22d3ee !important;
 }
 
@@ -34,13 +33,18 @@
 
 .sidemenu a {
   transition: .5s;
-  font-weight: 600 !important;
-  border-radius: 0 !important;
+  text-align: center!important;
+  font-weight: 500 !important;
+  border: 1px solid white !important;
   padding-left: 20px !important;
+  border-start-end-radius: var(--rounded-badge, 1.9rem) !important;
+  border-end-end-radius: var(--rounded-badge, 1.9rem) !important;
+
 }
 
 .sidemenu .active {
   color: black !important;
+  text-align: center!important;
   background-color: #22d3ee !important;
   border-radius: 0 !important;
   text-align: center !important;
@@ -52,6 +56,8 @@
 
 
 .sidemenu li:hover a {
+  outline: 0!important;
+  text-align: center!important;
   border: 1px solid  #22d3ee !important;
   border-radius: 0 !important;
   background-color: white !important;

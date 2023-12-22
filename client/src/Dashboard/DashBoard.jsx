@@ -3,7 +3,16 @@ import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 
 const DashBoard = () => {
-  const { user } = useContext(AuthContext);
+  const { user, passwordSignOut } = useContext(AuthContext);
+  const HandleLogout = () => {
+    passwordSignOut()
+      .then(() => {
+        swal("Good job!", "Logged out successfully!", "success");
+      })
+      .catch((error) => {
+        swal("Opps!", error, "error");
+      });
+  };
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -50,16 +59,48 @@ const DashBoard = () => {
           className="drawer-overlay"
         ></label>
 
-        <div className=" bg-white z-50  min-h-full w-72 pt-5">
-          <a className=" block text-2xl mx-5 mb-10 text-center  font-semibold rounded-badge text-black bg-cyan-400 py-4 px-2 ">
-            Task Manager
-          </a>
-          <ul className="menu sidemenu  p-0 flex flex-col gap-1 pr-5 text-base-content ">
-            {/* Sidebar content here */}
-
+        <div className=" bg-white z-50  min-h-full w-72 pt-5 flex flex-col justify-between">
+          <div>
+            <a className=" block text-2xl mx-5 mb-10 text-center  font-semibold rounded-badge text-black bg-cyan-400 py-4 px-2 ">
+              Task Manager
+            </a>
+            <ul className="menu sidemenu  p-0 flex flex-col gap-1 pr-5 text-base-content ">
+              <li>
+                <NavLink
+                  to="create"
+                  style={({ isActive, isPending }) => {
+                    return {
+                      color: isActive ? "active" : "pending",
+                    };
+                  }}
+                  className={({ isActive, isPending }) => {
+                    return isActive ? "active  " : isPending ? "pending" : "";
+                  }}
+                >
+                  Create Task
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="manage"
+                  style={({ isActive, isPending }) => {
+                    return {
+                      color: isActive ? "active" : "pending",
+                    };
+                  }}
+                  className={({ isActive, isPending }) => {
+                    return isActive ? "active " : isPending ? "pending" : "";
+                  }}
+                >
+                  Manage Task
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+          <ul className=" menu sidemenu  p-0 flex flex-col gap-1 pr-5 text-base-content ">
             <li>
               <NavLink
-                to="create"
+                to="/"
                 style={({ isActive, isPending }) => {
                   return {
                     color: isActive ? "active" : "pending",
@@ -69,12 +110,13 @@ const DashBoard = () => {
                   return isActive ? "active  " : isPending ? "pending" : "";
                 }}
               >
-                Create Task
+                Home
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="manage"
+                to="/"
+                onClick={HandleLogout}
                 style={({ isActive, isPending }) => {
                   return {
                     color: isActive ? "active" : "pending",
@@ -84,7 +126,7 @@ const DashBoard = () => {
                   return isActive ? "active " : isPending ? "pending" : "";
                 }}
               >
-                Manage Task
+                Log out
               </NavLink>
             </li>
           </ul>
