@@ -3,7 +3,7 @@ import React from "react";
 import { useDrag } from "react-dnd";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
-import DeadlineToast from "./DeadlineToast";
+
 
 const DragableTask = ({ task, refetch }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -38,12 +38,8 @@ const DragableTask = ({ task, refetch }) => {
     });
   };
 
-  const HandleEdit = () => {
-    console.log("edit");
-  };
   return (
     <div ref={drag} className={`card  `}>
-      <DeadlineToast task={task}/>
       <div
         className={`card-body p-5 rounded ${
           isDragging ? "opacity-25" : "opacity-100"
@@ -59,7 +55,7 @@ const DragableTask = ({ task, refetch }) => {
           <h2 className="card-title capitalize">{task.title}</h2>
           <div className="w-2/5 px-2">
             <div className="flex gap-2 justify-end items-center">
-              <FiEdit2 onClick={HandleEdit} className="cursor-pointer" />
+              <FiEdit2 className="cursor-pointer" />
               <AiOutlineDelete
                 onClick={() => HandleDelete(task._id)}
                 className="cursor-pointer"

@@ -34,13 +34,12 @@
 
 .sidemenu a {
   transition: .5s;
+  justify-content: start!important;
   text-align: center !important;
   font-weight: 500 !important;
   border: 1px solid white !important;
   padding-left: 20px !important;
-  border-start-end-radius: var(--rounded-badge, 1.9rem) !important;
-  border-end-end-radius: var(--rounded-badge, 1.9rem) !important;
-
+  border-radius: 0.25rem!important;
 }
 
 .sidemenu .active {
@@ -50,8 +49,7 @@
   border-radius: 0 !important;
   text-align: center !important;
   padding-left: 20px !important;
-  border-start-end-radius: var(--rounded-badge, 1.9rem) !important;
-  border-end-end-radius: var(--rounded-badge, 1.9rem) !important;
+  border-radius: 0.25rem!important;
   font-weight: 600 !important;
 }
 
@@ -63,7 +61,6 @@
   border-radius: 0 !important;
   background-color: white !important;
   color: black !important;
-  border-start-end-radius: var(--rounded-badge, 1.9rem) !important;
-  border-end-end-radius: var(--rounded-badge, 1.9rem) !important;
+  border-radius: 0.25rem!important;
   font-weight: 600 !important;
 }

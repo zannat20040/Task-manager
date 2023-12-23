@@ -13,6 +13,7 @@ const CreateTask = () => {
   const { user } = useContext(AuthContext);
 
   const { register, handleSubmit } = useForm();
+
   const onSubmit = (data) => {
     const task = { ...data, email: user?.email, status: "To-Do" };
     console.log(task);
@@ -54,9 +55,6 @@ const CreateTask = () => {
     });
   };
 
-  const HandleEdit = () => {
-    console.log("edit");
-  };
 
   const {
     data: allTask,
@@ -75,7 +73,7 @@ const CreateTask = () => {
   return (
     <div className=" px-4 mt-5 ">
       <div className="grid grid-cols-2 gap-2 justify-between items-center">
-        <h1 className="bg-cyan-400 py-4 px-10 mb-2 rounded-e-badge w-1/2 font-medium ">
+        <h1 className="bg-cyan-400 py-4 px-10 mb-2 rounded w-1/2 font-medium ">
           Today's Task
         </h1>
         <div className="flex gap-2 justify-end ">
@@ -99,28 +97,28 @@ const CreateTask = () => {
             {...register("title", { required: true })}
             type="text"
             placeholder="title"
-            className="input group focus:border-cyan-400 focus:outline-none rounded-badge "
+            className="input focus:border-none focus:outline-none  rounded"
           />
           <textarea
             {...register("description", { required: true })}
-            className="textarea  h-24 focus:border-cyan-400 focus:outline-none rounded-xl "
+            className="textarea  h-24 focus:border-none  focus:outline-none  rounded"
             placeholder="description"
           ></textarea>
           <div className="grid grid-cols-2 gap-2 justify-between">
             <input
               {...register("date", { required: true })}
               type="date"
-              className="input group focus:border-cyan-400 focus:outline-none rounded-badge "
+              className="input  focus:border-none focus:outline-none rounded"
             />
             <input
               {...register("time", { required: true })}
               type="time"
-              className="input  focus:border-cyan-400 focus:outline-none rounded-badge "
+              className="input   focus:border-none  focus:outline-none rounded"
             />
           </div>
           <select
             {...register("priority", { required: true })}
-            className="input focus:border-cyan-400 focus:outline-none rounded-badge"
+            className="input focus:border-none focus:outline-none rounded"
             required
           >
             <option disabled>Select Priority</option>
@@ -131,7 +129,7 @@ const CreateTask = () => {
           <input
             type="submit"
             value="Add task"
-            className="btn text-black bg-cyan-500 border-none text-base hover:bg-black  hover:text-cyan-500 btn-primary mt-3 rounded-badge w-full"
+            className="btn text-black bg-cyan-500 border-none text-base hover:bg-black rounded hover:text-cyan-500 btn-primary mt-3  w-full"
             required
           />
         </form>
@@ -144,7 +142,7 @@ const CreateTask = () => {
               <div className={`card rounded`}>
                 <DragableTask
                   task={task}
-                  key={task.id}
+                  key={task._id}
                   refetch={refetch}
                 ></DragableTask>
               </div>

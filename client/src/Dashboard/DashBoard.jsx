@@ -1,6 +1,10 @@
 import React, { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
+import { RiDragMove2Fill } from "react-icons/ri";
+import { MdCreate } from "react-icons/md";
+import { IoHome } from "react-icons/io5";
+import { PiSignOutBold } from "react-icons/pi";
 
 const DashBoard = () => {
   const { user, passwordSignOut } = useContext(AuthContext);
@@ -61,12 +65,12 @@ const DashBoard = () => {
 
         <div className=" bg-white z-50  min-h-full w-72 pt-5 flex flex-col justify-between">
           <div>
-            <a className=" block text-2xl mx-5 mb-10 text-center  font-semibold rounded-badge text-black bg-cyan-400 py-4 px-2 ">
+            <a className=" block text-2xl mx-5 mb-10 text-center  font-semibold rounded text-black bg-cyan-400 py-2 px-2 ">
               Task Manager
             </a>
-            <ul className="menu sidemenu  p-0 flex flex-col gap-1 pr-5 text-base-content ">
+            <ul className="menu sidemenu px-5 flex flex-col gap-1  ">
               <li>
-                <NavLink
+              <NavLink
                   to="create"
                   style={({ isActive, isPending }) => {
                     return {
@@ -77,22 +81,7 @@ const DashBoard = () => {
                     return isActive ? "active  " : isPending ? "pending" : "";
                   }}
                 >
-                  Create Task
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="notification"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      color: isActive ? "active" : "pending",
-                    };
-                  }}
-                  className={({ isActive, isPending }) => {
-                    return isActive ? "active " : isPending ? "pending" : "";
-                  }}
-                >
-                  Notification
+                    <MdCreate/> Create Task
                 </NavLink>
               </li>
               <li>
@@ -107,12 +96,12 @@ const DashBoard = () => {
                     return isActive ? "active " : isPending ? "pending" : "";
                   }}
                 >
-                  Manage Task
+                  <RiDragMove2Fill/> Manage Task
                 </NavLink>
               </li>
             </ul>
           </div>
-          <ul className=" menu sidemenu  p-0 flex flex-col gap-1 pr-5 text-base-content ">
+          <ul className=" menu sidemenu flex flex-col gap-1 px-5 ">
             <li>
               <NavLink
                 to="/"
@@ -125,7 +114,7 @@ const DashBoard = () => {
                   return isActive ? "active  " : isPending ? "pending" : "";
                 }}
               >
-                Home
+                <IoHome/> Home
               </NavLink>
             </li>
             <li>
@@ -141,7 +130,7 @@ const DashBoard = () => {
                   return isActive ? "active " : isPending ? "pending" : "";
                 }}
               >
-                Log out
+                <PiSignOutBold/> Log out
               </NavLink>
             </li>
           </ul>

@@ -2,9 +2,14 @@ import React, { useEffect } from "react";
 import bannerimg from "../assets/4380.jpg";
 import { Link } from "react-router-dom";
 import { LuTwitter , LuFacebook, LuInstagram , LuLinkedin  } from "react-icons/lu";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Banner = () => {
 
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   return (
     <div className="card card-side container  mx-auto rounded-none py-10 lg:py-20 items-center ">
@@ -19,7 +24,7 @@ const Banner = () => {
       </p>
       <div className="card-actions ">
         <Link to="/login">
-          <button className="btn shadow-md bg-black text-cyan-400 hover:text-black  hover:bg-cyan-500 border mt-5 rounded-badge btn-wide">
+          <button className="btn shadow-md bg-black text-cyan-400 hover:text-black  hover:bg-cyan-500 border mt-5 rounded btn-wide">
             Let’s Explore
           </button>
         </Link>
