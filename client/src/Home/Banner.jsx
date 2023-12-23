@@ -2,21 +2,16 @@ import React, { useEffect } from "react";
 import bannerimg from "../assets/4380.jpg";
 import { Link } from "react-router-dom";
 import { LuTwitter , LuFacebook, LuInstagram , LuLinkedin  } from "react-icons/lu";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
 const Banner = () => {
 
-  useEffect(() => {
-    AOS.init();
-  }, []);
 
   return (
-    <div className="card card-side container  mx-auto rounded-none py-20 items-center ">
+    <div className="card card-side container  mx-auto rounded-none py-10 lg:py-20 items-center ">
        
     <div data-aos="fade-left" className="card-body w-full">
-      <a className="text-5xl font-extrabold "><a className="text-5xl font-extrabold text-cyan-500">Task</a> Manager</a>
-      <p className="text-slate-500 font-light font-roboto mt-4">
+      <a className="text-5xl font-extrabold "><span className="text-5xl font-extrabold text-cyan-500">Task</span> Manager</a>
+      <p className="text-slate-500 font-light mt-4">
         Empowering yourself with Seamless task Management effortless ,
         anytime , anywhere. Begin your journey today and experience the ease
         of staying organized, boosting productivity, and achieving your
@@ -44,7 +39,7 @@ const Banner = () => {
         </button>
       </div>
     </div>
-    <figure data-aos="fade-right" className="w-full">
+    <figure data-aos="fade-right" className="w-0 md:w-full">
       <img src={bannerimg} alt="Movie" className="" />
     </figure>
   </div>

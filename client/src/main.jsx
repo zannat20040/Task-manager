@@ -22,7 +22,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ManageTask from "./Dashboard/ManageTask";
 const queryClient = new QueryClient();
-import scrollAnimation from '../scrollanimation'
+// import scrollAnimation from '../scrollanimation'
 
 const router = createBrowserRouter([
   {

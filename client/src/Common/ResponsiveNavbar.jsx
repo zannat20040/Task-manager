@@ -96,9 +96,9 @@ const ResponsiveNavbar = () => {
     </>
   );
   return (
-    <div className="w-full  z-50 bg-white sticky top-0">
-      <div className="navbar container mx-auto px-6">
-        <div className="navbar-start">
+    <div className="w-full shadow z-50 bg-white sticky top-0">
+      <div className="navbar justify-between  container mx-auto px-4">
+        <div className="navbar-start ">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -118,19 +118,22 @@ const ResponsiveNavbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="navmenu menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52"
+              className="navmenu shadow rounded-none menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100  w-52"
             >
               {navList}
           
             </ul>
-            <BiTask className="text-5xl text-cyan-500"/>
           </div>
+        <BiTask className="hidden lg:flex text-4xl text-cyan-500"/>
         </div>
+
+          <BiTask className="flex lg:hidden text-4xl text-cyan-500"/>
         <div className="navbar-end hidden lg:flex">
           <ul className="menu navmenu menu-horizontal px-1">
             {navList}
            
           </ul>
+
         </div>
       </div>
     </div>
