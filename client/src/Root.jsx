@@ -4,8 +4,8 @@ import ResponsiveNavbar from './Common/ResponsiveNavbar';
 
 const Root = () => {
     return (
-        <div>
-            <ResponsiveNavbar></ResponsiveNavbar>
+        <div className='relative'>
+            <ResponsiveNavbar ></ResponsiveNavbar>
             <Outlet></Outlet>
         </div>
     );

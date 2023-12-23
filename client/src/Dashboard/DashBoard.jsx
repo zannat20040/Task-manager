@@ -82,6 +82,21 @@ const DashBoard = () => {
               </li>
               <li>
                 <NavLink
+                  to="notification"
+                  style={({ isActive, isPending }) => {
+                    return {
+                      color: isActive ? "active" : "pending",
+                    };
+                  }}
+                  className={({ isActive, isPending }) => {
+                    return isActive ? "active " : isPending ? "pending" : "";
+                  }}
+                >
+                  Notification
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="manage"
                   style={({ isActive, isPending }) => {
                     return {

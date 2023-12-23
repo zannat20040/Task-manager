@@ -3,6 +3,7 @@ import React from "react";
 import { useDrag } from "react-dnd";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
+import DeadlineToast from "./DeadlineToast";
 
 const DragableTask = ({ task, refetch }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -42,6 +43,7 @@ const DragableTask = ({ task, refetch }) => {
   };
   return (
     <div ref={drag} className={`card  `}>
+      <DeadlineToast task={task}/>
       <div
         className={`card-body p-5 rounded ${
           isDragging ? "opacity-25" : "opacity-100"
@@ -68,7 +70,7 @@ const DragableTask = ({ task, refetch }) => {
         <p>{task.description}</p>
 
         <div className="card-actions justify-between">
-          <div>Deadline: {task.date}</div>
+          <div>Deadline: {task.date} </div>
           <div>
             {task.time} {parseInt(task.time) >= 12 ? "pm" : "am"}
           </div>

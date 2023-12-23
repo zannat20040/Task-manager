@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
 * {
-  font-family: 'Maven Pro', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 

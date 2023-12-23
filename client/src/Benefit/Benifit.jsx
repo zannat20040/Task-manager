@@ -1,74 +1,65 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import React, { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { FaFeatherPointed } from "react-icons/fa6";
 import img1 from "../assets/3529197.jpg";
 import img2 from "../assets/4002785.jpg";
 import img3 from "../assets/4505770.jpg";
 import img4 from "../assets/8262263.jpg";
-import { CiLinkedin } from "react-icons/ci";
-import { CiInstagram } from "react-icons/ci";
-import { LuTwitter } from "react-icons/lu";
-import { CiFacebook } from "react-icons/ci";
+import { LuQuote } from "react-icons/lu";
+import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/scrollbar";
+import { Autoplay, Scrollbar } from "swiper/modules";
+
 const Benifit = () => {
-  const userBenefits = [
-    "Meet project deadlines",
-    "Streamline project planning",
-    "Assign tasks with ease",
-    "Keep track of assignments",
-    "Manage study schedules",
-    "Manage business tasks",
-    "Achieve project goals effectively",
-    "Enhance productivity",
-    "Manage work tasks efficiently",
-    "Customize the task management system",
-  ];
+  const [testimonials, setTestimonials] = useState([]);
+  useEffect(() => {
+    axios
+      .get("./testimonial.json")
+      .then((res) => {
+        setTestimonials(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
 
   return (
-    <div className="container mx-auto mt-14 px-4  ">
-      <div className="grid grid-cols-2 gap-5 justify-between items-center ">
-        <div>
-          <h2 className="card-title text-4xl block  mb-3">
-            Our Community,{" "}
-            <span className="text-cyan-400  "> Your Advantage</span>
-          </h2>
-          <div className="w-40 h-1 bg-cyan-400 rounded-badge mb-3"></div>
-          <p>
-            Whether you're a student managing assignments or a corporate
-            professional optimizing work tasks, find the right features to boost
-            your productivity.
-          </p>
-          <div className="mt-5">
-            {userBenefits.map((item) => (
-              <div className="flex gap-2 items-center ">
-                <FaFeatherPointed className="text-cyan-400" />{" "}
-                <p className="capitalize"> {item}</p>
+    <div className="max-w-6xl mx-auto mt-24 px-4  ">
+      <h2 className="card-title text-4xl block text-center mb-3">
+      Know <span className="text-cyan-400  ">  How</span> Our Client 
+        <span className="text-cyan-400  "> Get Benifit</span>
+      </h2>
+      <div  className="w-40 h-1 bg-cyan-400 mb-10 rounded-badge mx-auto"></div>
+      <div className="grid grid-cols-2 gap-10 justify-between items-center">
+      <img src={img1} alt="" data-aos="fade-right" />
+      <div className="">
+        <Swiper
+         
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          modules={[Scrollbar, Autoplay]}
+          className="mySwiper"
+        >
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide key={index}>
+              <div className=" py-10 "  data-aos="fade-left" >
+                <LuQuote className="absolute text-slate-300 text-9xl top-[-5px] right-20" />
+                <p className="relative mb-5  font-light text-xl">
+                 {testimonial?.review}
+                </p>
+                <p className="ml-5 mb-5 text-end text-cyan-400  tracking-widest ">
+                -  {testimonial.name}
+                </p>
               </div>
-            ))}
-          </div>
-          <div className="flex gap-3 mt-5">
-            <button className="text-lg rounded-full text-cyan-400 border-cyan-400 border w-10 h-10 hover:text-white hover:bg-cyan-400 flex justify-center items-center transition-all">
-              <CiLinkedin />
-            </button>
-            <button className="text-lg rounded-full text-cyan-400 border-cyan-400 border w-10 h-10 hover:text-white hover:bg-cyan-400 flex justify-center items-center transition-all">
-              <CiInstagram />
-            </button>
-            <button className="text-lg rounded-full text-cyan-400 border-cyan-400 border w-10 h-10 hover:text-white hover:bg-cyan-400 flex justify-center items-center transition-all">
-              <CiFacebook />
-            </button>
-            <button className="text-lg rounded-full text-cyan-400 border-cyan-400 border w-10 h-10 hover:text-white hover:bg-cyan-400 flex justify-center items-center transition-all">
-              <LuTwitter />
-            </button>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-3 ">
-          <img src={img1} alt="" className="shadow-xl h-full " />
-          <img src={img2} alt="" className="shadow-xl h-full " />
-          <img src={img3} alt="" className="shadow-xl h-full" />
-          <img src={img4} alt="" className="shadow-xl h-full " />
-        </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
       </div>
     </div>
   );

@@ -1,17 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Toaster } from "react-hot-toast";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
 } from "react-router-dom";
 import Root from "./Root";
 import Home from "./Home/Home";
 import Login from "./Login/Login";
-import LoginForm from "./Login/LoginForm";
 import Register from "./Register/Register";
 import AuthProvider from "./AuthProvider.jsx/AuthProvider";
 import PrivateRoute from "./Private/PrivateRoute";
@@ -20,12 +17,12 @@ import CreateTask from "./Dashboard/CreateTask";
 import {
   QueryClient,
   QueryClientProvider,
-  useQuery,
 } from "@tanstack/react-query";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ManageTask from "./Dashboard/ManageTask";
 const queryClient = new QueryClient();
+import scrollAnimation from '../scrollanimation'
 
 const router = createBrowserRouter([
   {
@@ -71,9 +68,16 @@ const router = createBrowserRouter([
         path: "manage",
         element: <ManageTask></ManageTask>,
       },
+      {
+        path: "notification",
+        element: <ManageTask></ManageTask>,
+      },
     ],
   },
 ]);
+
+
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

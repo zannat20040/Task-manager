@@ -1,33 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bannerimg from "../assets/4380.jpg";
 import { Link } from "react-router-dom";
+import { LuTwitter , LuFacebook, LuInstagram , LuLinkedin  } from "react-icons/lu";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Banner = () => {
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
-    <div className="">
-      <div className="card card-side  container  mx-auto rounded-none py-20 items-center ">
-        <figure className="w-full">
-          <img src={bannerimg} alt="Movie" className="" />
-        </figure>
-        <div className="card-body w-full">
-          <h2 className="card-title text-4xl inline">
-            Get Started <span className="text-cyan-400 ">Today!</span>
-          </h2>
-          <h2 className="card-title text-4xl inline">
-            Empowering Yourself with Seamless{" "}
-            <span className="text-cyan-400 ">Task Management</span>
-          </h2>
-          <p>Effortless , Anytime , Anywhere</p>
-          <div className="card-actions ">
-            <Link to="/login">
-              <button className="btn text-black bg-cyan-400 border-none text-base hover:bg-black hover:text-cyan-400 btn-primary mt-5 rounded-badge btn-wide">
-                Let’s Explore
-              </button>
-            </Link>
-          </div>
-        </div>
+    <div className="card card-side container  mx-auto rounded-none py-20 items-center ">
+       
+    <div data-aos="fade-left" className="card-body w-full">
+      <a className="text-5xl font-extrabold "><a className="text-5xl font-extrabold text-cyan-500">Task</a> Manager</a>
+      <p className="text-slate-500 font-light font-roboto mt-4">
+        Empowering yourself with Seamless task Management effortless ,
+        anytime , anywhere. Begin your journey today and experience the ease
+        of staying organized, boosting productivity, and achieving your
+        goals with our intuitive task management solution!
+      </p>
+      <div className="card-actions ">
+        <Link to="/login">
+          <button className="btn shadow-md bg-black text-cyan-400 hover:text-black  hover:bg-cyan-500 border mt-5 rounded-badge btn-wide">
+            Let’s Explore
+          </button>
+        </Link>
+      </div>
+      <div className="flex gap-3 mt-5">
+        <button className="text-lg rounded-full text-black border-black border w-10 h-10 hover:text-white hover:bg-black flex justify-center items-center transition-all">
+          <LuLinkedin />
+        </button>
+        <button className="text-lg rounded-full text-black border-black border w-10 h-10 hover:text-white hover:bg-black flex justify-center items-center transition-all">
+          <LuInstagram />
+        </button>
+        <button className="text-lg rounded-full text-black border-black border w-10 h-10 hover:text-white hover:bg-black flex justify-center items-center transition-all">
+          <LuFacebook />
+        </button>
+        <button className="text-lg rounded-full text-black border-black border w-10 h-10 hover:text-white hover:bg-black flex justify-center items-center transition-all">
+          <LuTwitter />
+        </button>
       </div>
     </div>
+    <figure data-aos="fade-right" className="w-full">
+      <img src={bannerimg} alt="Movie" className="" />
+    </figure>
+  </div>
   );
 };
 

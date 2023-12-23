@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
+import { BiTask } from "react-icons/bi";
 
 const ResponsiveNavbar = () => {
   const { user, passwordSignOut } = useContext(AuthContext);
@@ -95,8 +96,8 @@ const ResponsiveNavbar = () => {
     </>
   );
   return (
-    <div className="shadow-lg ">
-      <div className="navbar bg-base-100 container mx-auto">
+    <div className="w-full  z-50 bg-white sticky top-0">
+      <div className="navbar container mx-auto px-6">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -117,13 +118,13 @@ const ResponsiveNavbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="navmenu menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="navmenu menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52"
             >
               {navList}
           
             </ul>
+            <BiTask className="text-5xl text-cyan-500"/>
           </div>
-          <a className="text-3xl font-bold text-cyan-400">Task Manager</a>
         </div>
         <div className="navbar-end hidden lg:flex">
           <ul className="menu navmenu menu-horizontal px-1">

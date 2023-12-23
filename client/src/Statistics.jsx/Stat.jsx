@@ -18,13 +18,13 @@ const Stat = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-5xl mx-auto">
       <h2 className="card-title text-4xl block text-center mb-3">
         Meet Our <span className="text-cyan-400  "> User</span> Community
       </h2>
-      <div className="w-40 h-1 bg-cyan-400 mb-10 rounded-badge mx-auto"></div>
-
-      <Swiper
+      <div  className="w-40 h-1 bg-cyan-400 mb-10 rounded-badge mx-auto"></div>
+     <div data-aos="zoom-in" data-aos-duration="3000">
+     <Swiper  
         slidesPerView={4}
         spaceBetween={20}
         // pagination={{
@@ -45,6 +45,7 @@ const Stat = () => {
           ))}
      
       </Swiper>
+     </div>
     </div>
   );
 };
