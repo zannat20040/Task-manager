@@ -13,7 +13,6 @@ const ManageTask = () => {
   const [ongoingStatus, setOngoingStatus] = useState([]);
   const [completedStatus, setCompletedStatus] = useState([]);
 
-
   // tanstack query
   const {
     data: allTask,

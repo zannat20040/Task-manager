@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Toaster } from "react-hot-toast";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./Root";
 import Home from "./Home/Home";
 import Login from "./Login/Login";
@@ -14,15 +11,12 @@ import AuthProvider from "./AuthProvider.jsx/AuthProvider";
 import PrivateRoute from "./Private/PrivateRoute";
 import DashBoard from "./Dashboard/DashBoard";
 import CreateTask from "./Dashboard/CreateTask";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ManageTask from "./Dashboard/ManageTask";
 const queryClient = new QueryClient();
-import scrollAnimation from '../scrollanimation'
+import scrollAnimation from "../scrollanimation";
 
 const router = createBrowserRouter([
   {
@@ -62,26 +56,39 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <ManageTask></ManageTask>,
+        element: (
+          <PrivateRoute>
+            <ManageTask></ManageTask>
+          </PrivateRoute>
+        ),
       },
       {
         path: "create",
-        element: <CreateTask></CreateTask>,
+        element: (
+          <PrivateRoute>
+            <CreateTask></CreateTask>
+          </PrivateRoute>
+        ),
       },
       {
         path: "manage",
-        element: <ManageTask></ManageTask>,
+        element: (
+          <PrivateRoute>
+            <ManageTask></ManageTask>
+          </PrivateRoute>
+        ),
       },
       {
         path: "notification",
-        element: <ManageTask></ManageTask>,
+        element: (
+          <PrivateRoute>
+            <ManageTask></ManageTask>
+          </PrivateRoute>
+        ),
       },
     ],
   },
 ]);
-
-
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

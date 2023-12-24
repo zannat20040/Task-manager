@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import axios from "axios";
 
 const Login = () => {
   const { loginWithPass, googleSignIn, githubSignIn } = useContext(AuthContext);
@@ -19,11 +20,22 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
     loginWithPass(email, password)
       .then((userCredential) => {
-        swal("Good job!", "Logged in successfully!", "success");
-        navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
+        swal("Good job!", "Logged in successfully!", "success", );
+        const user = {email}
+        console.log(user)
+
+        // jwt
+        axios.post('https://task-manager-alpha-bice.vercel.app/jwt', user,{withCredentials:true})
+        .then(res=>{
+          console.log(res.data)
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+        // navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
       })
       .catch((error) => {
         swal("Opps!", error.message, "error");

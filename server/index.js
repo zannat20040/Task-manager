@@ -1,12 +1,18 @@
 const express = require('express');
+const jwt = require('jsonwebtoken')
 const cors = require('cors')
+const cookieParser = require('cookie-parser');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config()
 const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+  origin:['http://localhost:5173','https://task-manager-alpha-bice.vercel.app'],
+  credentials:true
+}));
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xtkjyfm.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
@@ -23,7 +29,20 @@ async function run() {
     const databse = client.db("Task-manager")
     const taskCollection = databse.collection("allTask")
 
+    app.post('/jwt', (req, res) => {
+      const user = req.body;
+      console.log('User:', user);
+      console.log('Token: ', process.env.SECRET);
 
+      const token = jwt.sign(user, process.env.SECRET, { expiresIn: '1h' });
+
+      res.cookie('token', token, { httpOnly: true }).send({success:true})
+      res.send(token);
+
+    
+    });
+
+    // dashboard
     app.post('/addTask', async (req, res) => {
       const task = req.body
       const result = await taskCollection.insertOne(task);
@@ -68,14 +87,12 @@ async function run() {
       res.send(result)
     })
 
-
     app.delete('/addTask/:id', async (req, res) => {
       const id = req.params.id
       const query = { _id: new ObjectId(id) };
       const result = await taskCollection.deleteOne(query);
       res.send(result)
     })
-
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
