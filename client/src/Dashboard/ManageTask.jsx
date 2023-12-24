@@ -6,11 +6,15 @@ import { useDrag, useDrop } from "react-dnd";
 import DragableTask from "./DragableTask";
 
 const ManageTask = () => {
+
+  // state
   const { user } = useContext(AuthContext);
   const [todoStatus, setTodoStatus] = useState([]);
   const [ongoingStatus, setOngoingStatus] = useState([]);
   const [completedStatus, setCompletedStatus] = useState([]);
 
+
+  // tanstack query
   const {
     data: allTask,
     refetch,
@@ -25,6 +29,7 @@ const ManageTask = () => {
     },
   });
 
+  // drop into section
   const [{ isOver: isOverToDo }, dropToDo] = useDrop(() => ({
     accept: "to-do",
     drop: (item) => addItemTo(item, "To-Do"),
@@ -49,8 +54,10 @@ const ManageTask = () => {
     }),
   }));
 
+  // drop item add
   const addItemTo = (droppedItem, targetSection) => {
     const { task } = droppedItem;
+    // console.log(task)
     if (allTask) {
       axios
         .patch(`http://localhost:5000/addTask/${task._id}`, {
@@ -67,6 +74,7 @@ const ManageTask = () => {
     }
   };
 
+  // task filter by status
   useEffect(() => {
     setTodoStatus(allTask?.filter((item) => item.status === "To-Do") || []);
     setOngoingStatus(
@@ -78,7 +86,8 @@ const ManageTask = () => {
   }, [allTask]);
 
   return (
-    <div className="grid grid-cols-3 gap-5 justify-between m-5 ">
+   <div className="overflow-x-auto">
+     <div className=" grid grid-cols-2 sm:grid-cols-3 gap-5 justify-between m-5 ">
       <div
         className={`h-fit shadow-xl ${
           isOverToDo ? "bg-slate-200" : ""
@@ -137,6 +146,7 @@ const ManageTask = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

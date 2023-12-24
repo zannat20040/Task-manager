@@ -52,8 +52,11 @@ const Benifit = () => {
                   <p className="relative mb-5  font-light text-xl">
                     {testimonial?.review}
                   </p>
-                  <p className="ml-5 mb-5 text-end text-cyan-400  tracking-widest ">
+                  <p className="ml-5 mb-2 text-end text-cyan-400  tracking-widest ">
                     - {testimonial.name}
+                  </p>
+                  <p className="ml-5 text-end   tracking-widest ">
+                    {testimonial.profession}
                   </p>
                 </div>
               </SwiperSlide>

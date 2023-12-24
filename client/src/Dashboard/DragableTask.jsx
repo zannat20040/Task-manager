@@ -7,6 +7,7 @@ import { FiEdit2 } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 const DragableTask = ({ task, refetch }) => {
+  // drag
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "to-do",
     item: { id: task.id, task },
@@ -15,6 +16,7 @@ const DragableTask = ({ task, refetch }) => {
     }),
   }));
 
+  // delete
   const HandleDelete = (id) => {
     console.log("delete");
     console.log(id);
@@ -30,22 +32,25 @@ const DragableTask = ({ task, refetch }) => {
           console.log(res.data);
           if (res.data.deletedCount > 0) {
             refetch();
-            swal("Good job!", "Task has been deleted", "success");
+            toast.success("Task deleted successfully");
           }
         });
       } else {
-        swal("Your imaginary file is safe!");
+        toast("Your task is safe");
       }
     });
   };
 
+  // edit
   const HandleEditClick = (id) => {
     document.getElementById(`my_modal_${id}`).showModal();
   };
+  // modal close 
   const HandleModalClose = (id) => {
     document.getElementById(`my_modal_${id}`).close();
   };
 
+  // task update
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data, id) => {
@@ -68,7 +73,7 @@ const DragableTask = ({ task, refetch }) => {
 
   return (
     <>
-      <div ref={drag} className={`card`}>
+      <div ref={drag} className={`card `}>
         <div
           className={`card-body p-5 rounded ${
             isDragging ? "opacity-25" : "opacity-100"
@@ -95,8 +100,7 @@ const DragableTask = ({ task, refetch }) => {
               </div>
             </div>
           </div>
-          <p>{task.description}</p>
-
+          <p className="overflow-auto">{task.description}</p>
           <div className="card-actions justify-between">
             <div>Deadline: {task.date} </div>
             <div>
@@ -106,7 +110,12 @@ const DragableTask = ({ task, refetch }) => {
         </div>
       </div>
       <dialog id={`my_modal_${task._id}`} className="modal">
+        
         <div className="modal-box  rounded bg-cyan-300">
+<div className="mb-10">
+<button  onClick={() => HandleModalClose(task._id)} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+
+</div>
           <form
             method="dialog"
             className=""

@@ -8,6 +8,8 @@ import { PiSignOutBold } from "react-icons/pi";
 
 const DashBoard = () => {
   const { user, passwordSignOut } = useContext(AuthContext);
+
+  // logout
   const HandleLogout = () => {
     passwordSignOut()
       .then(() => {
@@ -17,14 +19,15 @@ const DashBoard = () => {
         swal("Opps!", error, "error");
       });
   };
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex  flex-col ">
-        <div className="navbar shadow-lg flex justify-between md:justify-end bg-base-100 sticky top-0 z-30">
+        <div className="navbar shadow-lg flex justify-between lg:justify-end bg-base-100 sticky top-0 z-30">
           <label
             htmlFor="my-drawer-2"
-            className="btn bg-cyan-400  drawer-button lg:hidden"
+            className="btn btn-sm bg-white border-0 shadow-none drawer-button lg:hidden"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +45,7 @@ const DashBoard = () => {
             </svg>
           </label>
           <div className="">
-            <a className="text-base mr-3 text-cyan-300">{user?.displayName}</a>
+            <a className=" mr-3 ">{user?.displayName}</a>
             <div
               tabIndex={0}
               role="button"
@@ -56,7 +59,7 @@ const DashBoard = () => {
         </div>
         <Outlet></Outlet>
       </div>
-      <div className="drawer-side shadow-2xl">
+      <div className="drawer-side shadow-2xl z-50">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"

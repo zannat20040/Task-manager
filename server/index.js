@@ -46,15 +46,14 @@ async function run() {
           status: data.status,
         }
       }
+      // console.log(id, data)
       const result = await taskCollection.updateOne(query, updateStatus);
       res.send(result)
     })
 
     app.put('/addTask/:id', async (req, res) => {
       const id = req.params.id;
-      console.log(id)
       const data = req.body
-      console.log(data)
       const query = { _id: new ObjectId(id) };
       const updateTask = {
         $set: {
@@ -65,7 +64,6 @@ async function run() {
           title: data.title,
         }
       }
-      console.log(updateTask)
       const result = await taskCollection.updateOne(query, updateTask);
       res.send(result)
     })

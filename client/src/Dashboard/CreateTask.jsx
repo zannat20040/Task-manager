@@ -5,15 +5,16 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 import axios from "axios";
 import { FaCircle } from "react-icons/fa";
-import { FiEdit2 } from "react-icons/fi";
-import { AiOutlineDelete } from "react-icons/ai";
 import DragableTask from "./DragableTask";
 
 const CreateTask = () => {
+  // context
   const { user } = useContext(AuthContext);
 
+  // create task form 
   const { register, handleSubmit } = useForm();
 
+  // task created
   const onSubmit = (data) => {
     const task = { ...data, email: user?.email, status: "To-Do" };
     console.log(task);
@@ -31,31 +32,7 @@ const CreateTask = () => {
       });
   };
 
-  const HandleDelete = (id) => {
-    console.log("delete");
-    console.log(id);
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this task!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        axios.delete(`http://localhost:5000/addTask/${id}`).then((res) => {
-          console.log(res.data);
-          if (res.data.deletedCount > 0) {
-            refetch();
-            swal("Good job!", "Task has been deleted", "success");
-          }
-        });
-      } else {
-        swal("Your imaginary file is safe!");
-      }
-    });
-  };
-
-
+  // get data by email
   const {
     data: allTask,
     refetch,
@@ -72,11 +49,11 @@ const CreateTask = () => {
 
   return (
     <div className=" px-4 mt-5 ">
-      <div className="grid grid-cols-2 gap-2 justify-between items-center">
-        <h1 className="bg-cyan-400 py-4 px-10 mb-2 rounded w-1/2 font-medium ">
-          Today's Task
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 justify-between items-center">
+        <h1 className="bg-cyan-400 py-4 px-10 mb-2 rounded w-72 font-medium ">
+          Add Today's Task
         </h1>
-        <div className="flex gap-2 justify-end ">
+        <div className="sm:flex gap-2  mb-5 hidden justify-end ">
           <h1 className="flex gap-1 items-center text-cyan-400 ">
             High <FaCircle className="text-green-300" />
           </h1>
@@ -88,10 +65,11 @@ const CreateTask = () => {
           </h1>
         </div>
       </div>
-      <div className="grid grid-cols-3  gap-4 justify-between ">
+
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-y-4 md:gap-4 justify-between ">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className=" col-span-2 h-fit bg-cyan-300 rounded  shadow-lg p-14 flex flex-col gap-2 "
+          className=" col-span-2 h-fit bg-cyan-300 rounded  shadow-lg p-5 md:p-14 flex flex-col gap-2 "
         >
           <input
             {...register("title", { required: true })}
@@ -104,7 +82,7 @@ const CreateTask = () => {
             className="textarea  h-24 focus:border-none  focus:outline-none  rounded"
             placeholder="description"
           ></textarea>
-          <div className="grid grid-cols-2 gap-2 justify-between">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 justify-between">
             <input
               {...register("date", { required: true })}
               type="date"
@@ -133,6 +111,18 @@ const CreateTask = () => {
             required
           />
         </form>
+        <div>
+        <div className="flex gap-2 justify-start mb-5 sm:hidden ">
+          <h1 className="flex gap-1 items-center text-cyan-400 ">
+            High <FaCircle className="text-green-300" />
+          </h1>
+          <h1 className="flex gap-1 items-center text-cyan-400  ">
+            Modarate <FaCircle className="text-yellow-300" />
+          </h1>
+          <h1 className="flex gap-1 items-center text-cyan-400 ">
+            Low <FaCircle className="text-red-300" />
+          </h1>
+        </div>
         <div className="shadow-xl rounded">
           <h1 className="rounded-t bg-cyan-300 py-4 text-center px-4 font-medium ">
             Previous Added Task
@@ -148,6 +138,7 @@ const CreateTask = () => {
               </div>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </div>
