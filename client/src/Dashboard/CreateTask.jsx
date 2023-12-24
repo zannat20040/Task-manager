@@ -11,7 +11,7 @@ const CreateTask = () => {
   // context
   const { user } = useContext(AuthContext);
 
-  // create task form 
+  // create task form
   const { register, handleSubmit } = useForm();
 
   // task created
@@ -41,7 +41,8 @@ const CreateTask = () => {
     queryKey: ["allTask"],
     queryFn: async () => {
       const response = await axios.get(
-        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`
+        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`,
+        { withCredentials: true }
       );
       return response.data;
     },
@@ -112,33 +113,33 @@ const CreateTask = () => {
           />
         </form>
         <div>
-        <div className="flex gap-2 justify-start mb-5 sm:hidden ">
-          <h1 className="flex gap-1 items-center text-cyan-400 ">
-            High <FaCircle className="text-green-300" />
-          </h1>
-          <h1 className="flex gap-1 items-center text-cyan-400  ">
-            Modarate <FaCircle className="text-yellow-300" />
-          </h1>
-          <h1 className="flex gap-1 items-center text-cyan-400 ">
-            Low <FaCircle className="text-red-300" />
-          </h1>
-        </div>
-        <div className="shadow-xl rounded">
-          <h1 className="rounded-t bg-cyan-300 py-4 text-center px-4 font-medium ">
-            Previous Added Task
-          </h1>
-          <div className="grid grid-cols-1 gap-2 my-4 px-4 overflow-y-scroll h-96 ">
-            {allTask?.map((task) => (
-              <div className={`card rounded`}>
-                <DragableTask
-                  task={task}
-                  key={task._id}
-                  refetch={refetch}
-                ></DragableTask>
-              </div>
-            ))}
+          <div className="flex gap-2 justify-start mb-5 sm:hidden ">
+            <h1 className="flex gap-1 items-center text-cyan-400 ">
+              High <FaCircle className="text-green-300" />
+            </h1>
+            <h1 className="flex gap-1 items-center text-cyan-400  ">
+              Modarate <FaCircle className="text-yellow-300" />
+            </h1>
+            <h1 className="flex gap-1 items-center text-cyan-400 ">
+              Low <FaCircle className="text-red-300" />
+            </h1>
           </div>
-        </div>
+          <div className="shadow-xl rounded">
+            <h1 className="rounded-t bg-cyan-300 py-4 text-center px-4 font-medium ">
+              Previous Added Task
+            </h1>
+            <div className="grid grid-cols-1 gap-2 my-4 px-4 overflow-y-scroll h-96 ">
+              {allTask?.map((task) => (
+                <div className={`card rounded`}>
+                  <DragableTask
+                    task={task}
+                    key={task._id}
+                    refetch={refetch}
+                  ></DragableTask>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -9,10 +9,14 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-  origin:['http://localhost:5173','https://task-manager-alpha-bice.vercel.app'],
-  credentials:true
-}));
+app.use(cors());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
+
+
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xtkjyfm.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
@@ -36,10 +40,9 @@ async function run() {
 
       const token = jwt.sign(user, process.env.SECRET, { expiresIn: '1h' });
 
-      res.cookie('token', token, { httpOnly: true }).send({success:true})
-      res.send(token);
+      res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true }).send({ success: true })
 
-    
+
     });
 
     // dashboard
@@ -52,6 +55,8 @@ async function run() {
     app.get('/addTask', async (req, res) => {
       const email = req.query.email
       const query = { email: email }
+      const token = req.cookies.token
+      console.log(token)
       const result = await taskCollection.find(query).toArray();
       res.send(result)
     })

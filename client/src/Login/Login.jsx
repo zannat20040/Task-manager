@@ -28,14 +28,16 @@ const Login = () => {
         console.log(user)
 
         // jwt
-        axios.post('https://task-manager-alpha-bice.vercel.app/jwt', user,{withCredentials:true})
+        axios.post('http://localhost:5000/jwt', user,{withCredentials:true})
         .then(res=>{
+          if(res.data.success){
+            navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
+          }
           console.log(res.data)
         })
         .catch(err=>{
           console.log(err)
         })
-        // navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
       })
       .catch((error) => {
         swal("Opps!", error.message, "error");
