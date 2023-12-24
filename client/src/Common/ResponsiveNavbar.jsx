@@ -50,7 +50,7 @@ const ResponsiveNavbar = () => {
       </li>
       <li>
         <NavLink
-          to="/help"
+          to="/about"
           style={({ isActive, isPending }) => {
             return {
               color: isActive ? "active" : "pending",
@@ -60,7 +60,7 @@ const ResponsiveNavbar = () => {
             return isActive ? "active" : isPending ? "pending" : "";
           }}
         >
-          Help
+          About
         </NavLink>
       </li>
       <li>

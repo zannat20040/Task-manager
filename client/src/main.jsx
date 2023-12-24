@@ -17,6 +17,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import ManageTask from "./Dashboard/ManageTask";
 const queryClient = new QueryClient();
 import scrollAnimation from "../scrollanimation";
+import About from "./About/About";
 
 const router = createBrowserRouter([
   {
@@ -29,11 +30,9 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/help",
+        path: "/about",
         element: (
-          <PrivateRoute>
-            <div>help</div>
-          </PrivateRoute>
+          <About></About>
         ),
       },
     ],

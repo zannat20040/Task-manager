@@ -19,11 +19,7 @@ const CreateTask = () => {
     const task = { ...data, email: user?.email, status: "To-Do" };
     console.log(task);
     axios
-      .post("https://task-manager-alpha-bice.vercel.app/addTask", task, {
-        headers:{
-          authorization:`Bearer ${localStorage.getItem('access-token')}`
-        }
-      })
+      .post("https://task-manager-alpha-bice.vercel.app/addTask", task)
       .then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {
@@ -46,7 +42,11 @@ const CreateTask = () => {
     queryFn: async () => {
       const response = await axios.get(
         `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`,
-        { withCredentials: true }
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
       );
       return response.data;
     },

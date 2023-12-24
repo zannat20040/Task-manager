@@ -1,40 +1,14 @@
 const express = require('express');
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
-const cookieParser = require('cookie-parser');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config()
 const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(express.json());
-app.use(cookieParser());
 app.use(cors());
 
-
-// app.use((req, res, next) => {
-//   console.log('Cookies:', req.cookies);
-//   next();
-// });
-
-
-// const verifyToken = async (req, res, next) => {
-//   const token = req.cookies.token
-//   console.log('token:', token)
-//   if (!token) {
-//     return res.status(401).send({ message: 'Unauthorized' }); // 
-//   }
-//   jwt.verify(token, process.env.SECRET, (err, decoded) => {
-//     if (err) {
-//       console.log(err)
-//       return res.status(401).send({ message: 'Unauthorized' }); // 
-//     }
-//     console.log('verified user', decoded)
-//     req.user = decoded
-//     next();
-//   });
-
-// }
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xtkjyfm.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -52,6 +26,24 @@ async function run() {
     const databse = client.db("Task-manager")
     const taskCollection = databse.collection("allTask")
 
+
+    const verifyToken = async(req,res,next)=>{
+      console.log('INside token:',token)
+      if (req.headers.authorization) {
+        return res.status(401).send({message:'Unauthorized'}); // 
+      }
+      const token = req.headers.authorization.split(' ')[1]
+      jwt.verify(token, process.env.SECRET , (err, decoded)=> {
+        if(err){
+          return res.status(401).send({message:'Unauthorized'}); // 
+        }
+        req.decoded = decoded
+        next();
+      
+      });
+      
+    }
+
     // jwt
     app.post('/jwt', (req, res) => {
       const user = req.body;
@@ -68,12 +60,10 @@ async function run() {
       res.send(result)
     })
 
-    app.get('/addTask',async (req, res) => {
+    app.get('/addTask',verifyToken, async (req, res) => {
       const email = req.query.email
       const query = { email: email }
-      console.log(req.headers)
       const result = await taskCollection.find(query).toArray();
-      // console.log('Cookies:', req.cookies);
       res.send(result)
     })
 
