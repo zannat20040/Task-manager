@@ -10,7 +10,6 @@ import {
   GithubAuthProvider 
 } from "firebase/auth";
 import app from "../Firebase.config";
-import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -50,20 +49,9 @@ const AuthProvider = ({ children }) => {
       if (user) {
         setUser(user);
       setLoading(false);
-      axios.post('http://localhost:5000/jwt', {email:user.email})
-        .then(res=>{
-          if(res.data.token){
-            localStorage.setItem('access-token',res.data.token )
-            console.log('JWT Token Set in localStorage:', res.data.token);
-          }
-          console.log(res.data)
-        })
-
       } else {
-        localStorage.removeItem('access-token')
         setLoading(false);
         setUser(null);
-
       }
     });
     return () => {

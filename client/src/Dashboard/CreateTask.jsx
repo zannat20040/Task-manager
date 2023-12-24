@@ -41,12 +41,7 @@ const CreateTask = () => {
     queryKey: ["allTask"],
     queryFn: async () => {
       const response = await axios.get(
-        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          },
-        }
+        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`
       );
       return response.data;
     },

@@ -1,5 +1,4 @@
 const express = require('express');
-const jwt = require('jsonwebtoken')
 const cors = require('cors')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config()
@@ -26,32 +25,6 @@ async function run() {
     const databse = client.db("Task-manager")
     const taskCollection = databse.collection("allTask")
 
-
-    const verifyToken = async(req,res,next)=>{
-      console.log('INside token:',token)
-      if (req.headers.authorization) {
-        return res.status(401).send({message:'Unauthorized'}); // 
-      }
-      const token = req.headers.authorization.split(' ')[1]
-      jwt.verify(token, process.env.SECRET , (err, decoded)=> {
-        if(err){
-          return res.status(401).send({message:'Unauthorized'}); // 
-        }
-        req.decoded = decoded
-        next();
-      
-      });
-      
-    }
-
-    // jwt
-    app.post('/jwt', (req, res) => {
-      const user = req.body;
-      const token = jwt.sign(user, process.env.SECRET, { expiresIn: '1h' });
-      res.send({token})
-      // res.cookie('token', token, { httpOnly: true, samesite: 'none' }).send({ success: true })
-    });
-
     // dashboard
     app.post('/addTask', async (req, res) => {
       const task = req.body
@@ -60,7 +33,7 @@ async function run() {
       res.send(result)
     })
 
-    app.get('/addTask',verifyToken, async (req, res) => {
+    app.get('/addTask', async (req, res) => {
       const email = req.query.email
       const query = { email: email }
       const result = await taskCollection.find(query).toArray();
