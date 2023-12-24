@@ -50,6 +50,26 @@ async function run() {
       res.send(result)
     })
 
+    app.put('/addTask/:id', async (req, res) => {
+      const id = req.params.id;
+      console.log(id)
+      const data = req.body
+      console.log(data)
+      const query = { _id: new ObjectId(id) };
+      const updateTask = {
+        $set: {
+          date: data.date,
+          description: data.description,
+          priority: data.priority,
+          time: data.time,
+          title: data.title,
+        }
+      }
+      console.log(updateTask)
+      const result = await taskCollection.updateOne(query, updateTask);
+      res.send(result)
+    })
+
 
     app.delete('/addTask/:id', async (req, res) => {
       const id = req.params.id

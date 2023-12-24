@@ -85,7 +85,7 @@ const ManageTask = () => {
         } rounded`}
         ref={dropToDo}
       >
-        <h1 className="rounded-t bg-cyan-400 py-4 text-center px-4 font-medium ">
+        <h1 className="rounded-t bg-yellow-200 py-4 text-center px-4 font-medium ">
           To-Do
         </h1>
         <div className="grid grid-cols-1 gap-2 my-4 px-4 ">
@@ -104,7 +104,7 @@ const ManageTask = () => {
         } rounded`}
         ref={dropOngoing}
       >
-        <h1 className="rounded-t bg-yellow-200 py-4 text-center px-4 font-medium ">
+        <h1 className="rounded-t  bg-cyan-400 py-4 text-center px-4 font-medium ">
           Ongoing
         </h1>
         <div className="grid grid-cols-1 gap-2 my-4 px-4 ">
@@ -112,6 +112,7 @@ const ManageTask = () => {
             <DragableTask
               task={task}
               key={task._id}
+              refetch={refetch}
             ></DragableTask>
           ))}
         </div>
@@ -130,6 +131,7 @@ const ManageTask = () => {
             <DragableTask
               task={task}
               key={task._id}
+              refetch={refetch}
             ></DragableTask>
           ))}
         </div>
