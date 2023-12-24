@@ -19,7 +19,7 @@ const CreateTask = () => {
     const task = { ...data, email: user?.email, status: "To-Do" };
     console.log(task);
     axios
-      .post("https://task-manager-alpha-bice.vercel.app/addTask", task)
+      .post("http://localhost:5000/addTask", task,{ withCredentials: true })
       .then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {
@@ -41,8 +41,7 @@ const CreateTask = () => {
     queryKey: ["allTask"],
     queryFn: async () => {
       const response = await axios.get(
-        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`,
-        { withCredentials: true }
+        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`, {withCredentials:true}
       );
       return response.data;
     },
@@ -130,10 +129,10 @@ const CreateTask = () => {
             </h1>
             <div className="grid grid-cols-1 gap-2 my-4 px-4 overflow-y-scroll h-96 ">
               {allTask?.map((task) => (
-                <div className={`card rounded`}>
+                <div     key={task._id}  className={`card rounded`}>
                   <DragableTask
                     task={task}
-                    key={task._id}
+                
                     refetch={refetch}
                   ></DragableTask>
                 </div>

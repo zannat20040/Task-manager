@@ -9,13 +9,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
-
+app.use(cors({
+  origin: ['http://localhost:5173'],
+  credentials: true,
+}));
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xtkjyfm.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -33,6 +30,7 @@ async function run() {
     const databse = client.db("Task-manager")
     const taskCollection = databse.collection("allTask")
 
+    // jwt
     app.post('/jwt', (req, res) => {
       const user = req.body;
       console.log('User:', user);
@@ -40,7 +38,7 @@ async function run() {
 
       const token = jwt.sign(user, process.env.SECRET, { expiresIn: '1h' });
 
-      res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true }).send({ success: true })
+      res.cookie('token', token, { httpOnly: true, sameSite:'none', secure:false }).send({ success: true })
 
 
     });
