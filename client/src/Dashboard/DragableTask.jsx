@@ -28,7 +28,7 @@ const DragableTask = ({ task, refetch }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(`http://localhost:5000/addTask/${id}`).then((res) => {
+        axios.delete(`https://task-manager-alpha-bice.vercel.app/addTask/${id}`).then((res) => {
           console.log(res.data);
           if (res.data.deletedCount > 0) {
             refetch();
@@ -58,7 +58,7 @@ const DragableTask = ({ task, refetch }) => {
     console.log(id);
     console.log(task);
     axios
-      .put(`http://localhost:5000/addTask/${id}`, task)
+      .put(`https://task-manager-alpha-bice.vercel.app/addTask/${id}`, task)
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount > 0) {

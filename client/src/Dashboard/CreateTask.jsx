@@ -19,7 +19,7 @@ const CreateTask = () => {
     const task = { ...data, email: user?.email, status: "To-Do" };
     console.log(task);
     axios
-      .post("http://localhost:5000/addTask", task)
+      .post("https://task-manager-alpha-bice.vercel.app/addTask", task)
       .then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {
@@ -41,7 +41,7 @@ const CreateTask = () => {
     queryKey: ["allTask"],
     queryFn: async () => {
       const response = await axios.get(
-        `http://localhost:5000/addTask?email=${user?.email}`
+        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`
       );
       return response.data;
     },

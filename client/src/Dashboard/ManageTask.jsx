@@ -23,7 +23,7 @@ const ManageTask = () => {
     queryKey: ["allTask"],
     queryFn: async () => {
       const response = await axios.get(
-        `http://localhost:5000/addTask?email=${user?.email}`
+        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`
       );
       return response.data;
     },
@@ -60,7 +60,7 @@ const ManageTask = () => {
     // console.log(task)
     if (allTask) {
       axios
-        .patch(`http://localhost:5000/addTask/${task._id}`, {
+        .patch(`https://task-manager-alpha-bice.vercel.app/addTask/${task._id}`, {
           status: targetSection,
         })
         .then((res) => {
