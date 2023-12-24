@@ -9,10 +9,32 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-  origin: ['http://localhost:5173'],
-  credentials: true,
-}));
+app.use(cors());
+
+
+// app.use((req, res, next) => {
+//   console.log('Cookies:', req.cookies);
+//   next();
+// });
+
+
+// const verifyToken = async (req, res, next) => {
+//   const token = req.cookies.token
+//   console.log('token:', token)
+//   if (!token) {
+//     return res.status(401).send({ message: 'Unauthorized' }); // 
+//   }
+//   jwt.verify(token, process.env.SECRET, (err, decoded) => {
+//     if (err) {
+//       console.log(err)
+//       return res.status(401).send({ message: 'Unauthorized' }); // 
+//     }
+//     console.log('verified user', decoded)
+//     req.user = decoded
+//     next();
+//   });
+
+// }
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xtkjyfm.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -33,29 +55,25 @@ async function run() {
     // jwt
     app.post('/jwt', (req, res) => {
       const user = req.body;
-      console.log('User:', user);
-      console.log('Token: ', process.env.SECRET);
-
       const token = jwt.sign(user, process.env.SECRET, { expiresIn: '1h' });
-
-      res.cookie('token', token, { httpOnly: true, sameSite:'none', secure:false }).send({ success: true })
-
-
+      res.send({token})
+      // res.cookie('token', token, { httpOnly: true, samesite: 'none' }).send({ success: true })
     });
 
     // dashboard
     app.post('/addTask', async (req, res) => {
       const task = req.body
+      console.log(task)
       const result = await taskCollection.insertOne(task);
       res.send(result)
     })
 
-    app.get('/addTask', async (req, res) => {
+    app.get('/addTask',async (req, res) => {
       const email = req.query.email
       const query = { email: email }
-      const token = req.cookies.token
-      console.log(token)
+      console.log(req.headers)
       const result = await taskCollection.find(query).toArray();
+      // console.log('Cookies:', req.cookies);
       res.send(result)
     })
 
@@ -109,6 +127,7 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
+  
   console.log(`Example app listening on port ${port}`)
 })
 

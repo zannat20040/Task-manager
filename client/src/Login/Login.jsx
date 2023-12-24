@@ -24,20 +24,8 @@ const Login = () => {
     loginWithPass(email, password)
       .then((userCredential) => {
         swal("Good job!", "Logged in successfully!", "success", );
-        const user = {email}
-        console.log(user)
+        navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
 
-        // jwt
-        axios.post('http://localhost:5000/jwt', user,{withCredentials:true})
-        .then(res=>{
-          if(res.data.success){
-            navigate(location?.state?.redirectTo? location?.state?.redirectTo : '/')
-          }
-          console.log(res.data)
-        })
-        .catch(err=>{
-          console.log(err)
-        })
       })
       .catch((error) => {
         swal("Opps!", error.message, "error");

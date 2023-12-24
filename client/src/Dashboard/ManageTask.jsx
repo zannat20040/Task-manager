@@ -22,7 +22,7 @@ const ManageTask = () => {
     queryKey: ["allTask"],
     queryFn: async () => {
       const response = await axios.get(
-        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`
+        `https://task-manager-alpha-bice.vercel.app/addTask?email=${user?.email}`,{withCredentials:true}
       );
       return response.data;
     },
