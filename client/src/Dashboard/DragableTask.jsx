@@ -91,11 +91,11 @@ const DragableTask = ({ task, refetch }) => {
               <div className="flex gap-2 justify-end items-center">
                 <FiEdit2
                   onClick={() => HandleEditClick(task._id)}
-                  className="cursor-pointer"
+                  className="cursor-pointer  "
                 />
                 <AiOutlineDelete
                   onClick={() => HandleDelete(task._id)}
-                  className="cursor-pointer"
+                  className="cursor-pointer "
                 />
               </div>
             </div>

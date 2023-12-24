@@ -93,9 +93,9 @@ const ManageTask = () => {
 
   return (
     <div className="overflow-x-auto">
-      <div className=" grid grid-cols-2 sm:grid-cols-3 gap-5 justify-between m-5 ">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 justify-between m-5 ">
         <div
-          className={`h-fit shadow-xl ${
+          className={`md:h-fit shadow-xl overflow-y-auto h-96 ${
             isOverToDo ? "bg-slate-200" : ""
           } rounded`}
           ref={dropToDo}
@@ -114,7 +114,7 @@ const ManageTask = () => {
           </div>
         </div>
         <div
-          className={` h-fit shadow-xl ${
+          className={` md:h-fit shadow-xl overflow-y-auto h-96${
             isOverOngoing ? "bg-slate-200" : ""
           } rounded`}
           ref={dropOngoing}
@@ -133,7 +133,7 @@ const ManageTask = () => {
           </div>
         </div>
         <div
-          className={` h-fit shadow-xl ${
+          className={` md:h-fit shadow-xl overflow-y-auto h-96 ${
             isOverCompleted ? "bg-slate-200" : ""
           } rounded`}
           ref={dropCompleted}
