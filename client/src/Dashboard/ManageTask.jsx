@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useDrag, useDrop } from "react-dnd";
 import DragableTask from "./DragableTask";
+import toast from "react-hot-toast";
 
 const ManageTask = () => {
   // state
@@ -25,7 +26,7 @@ const ManageTask = () => {
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("access-token")}`,
-          }
+          },
         }
       );
       return response.data;
@@ -90,6 +91,20 @@ const ManageTask = () => {
       allTask?.filter((item) => item.status === "Completed") || []
     );
   }, [allTask]);
+
+  const findMostRecentDeadline = async () => {
+    const mostRecent = await allTask.find((task) => {
+     return  new Date(`${task.date}T${task.time}`) < new Date();
+    });
+
+    toast(`${mostRecent.title} deadline is end. Please delete the task.`)
+    console.log(mostRecent);
+  };
+
+  useEffect(() => {
+    findMostRecentDeadline();
+  }, [allTask]);
+
 
   return (
     <div className="overflow-x-auto">
