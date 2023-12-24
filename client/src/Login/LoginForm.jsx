@@ -4,11 +4,10 @@ import { FaGithub, FaGooglePlusG } from "react-icons/fa6";
 
 const LoginForm = ({ HandleLogin, HandleGoogleSignin, HandleGithubSignin }) => {
   return (
-    <div className="w-2/3 mx-auto">
+    <div className="px-6 mx-auto">
       <div>
         <h1 className="text-5xl font-bold text-cyan-400">Sign in to Account</h1>
         <div className="w-40 h-1 bg-cyan-400 mt-3 rounded-badge"></div>
-
         <div className="flex gap-2 my-5">
           <button
             className="text-lg rounded-full text-cyan-400 border-cyan-400 border w-10 h-10 hover:text-white hover:bg-cyan-400 flex justify-center items-center transition-all"
@@ -23,7 +22,6 @@ const LoginForm = ({ HandleLogin, HandleGoogleSignin, HandleGithubSignin }) => {
             <FaGithub className="p-1 text-4xl" />
           </button>
         </div>
-
         <p className="my-5 text-gray-400">Or, use your email account </p>
       </div>
       <form onSubmit={HandleLogin}>
@@ -37,7 +35,7 @@ const LoginForm = ({ HandleLogin, HandleGoogleSignin, HandleGithubSignin }) => {
           />
         </div>
 
-        <div className="form-control mt-5 ">
+        <div className="form-control mt-2 ">
           <input
             type="password"
             placeholder="password"

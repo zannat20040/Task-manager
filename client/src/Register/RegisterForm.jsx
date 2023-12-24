@@ -6,7 +6,7 @@ const RegisterForm = ({HandleSignup, HandleGoogleSignin,HandleGithubSignin}) => 
   return (
   
 
-  <div className="w-2/3 mx-auto text-center">
+  <div className="w-full lg:w-2/3 mx-auto text-center px-6">
       <div>
       <h1 className="text-5xl font-bold text-cyan-400">Create Account</h1>
       <div className="w-40 h-1 bg-cyan-400 mt-3 rounded-badge mx-auto"></div>

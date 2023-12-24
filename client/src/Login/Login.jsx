@@ -1,16 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import LoginForm from "./LoginForm";
 import bgImg from "../assets/rm222batch3-mind-03.jpg";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Login = () => {
   const { loginWithPass, googleSignIn, githubSignIn } = useContext(AuthContext);
   const navigate = useNavigate()
   const location = useLocation()
 
-  
+  // direct login 
   const HandleLogin = (e) => {
     e.preventDefault();
 
@@ -28,6 +30,7 @@ const Login = () => {
       });
   };
 
+  // google login
   const HandleGoogleSignin = () => {
     googleSignIn()
       .then((result) => {
@@ -40,6 +43,7 @@ const Login = () => {
       });
   };
 
+  // github login
   const HandleGithubSignin = () => {
     githubSignIn()
       .then((result) => {
@@ -52,16 +56,21 @@ const Login = () => {
       });
   };
 
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
+  
   return (
     <>
       <div className="">
-        <div className="overflow-y-hidden min-h-screen flex justify-center ">
-          <div className=" shrink-0 w-3/5  items-center justify-center ">
+        <div className="overflow-y-hidden min-h-screen flex flex-col-reverse sm:grid lg:grid-cols-3 sm:grid-cols-2  justify-center ">
+          <div data-aos="fade-right" className=" shrink-0 lg:col-span-2 items-center justify-center ">
             <div
               className="hero h-full"
               style={{ backgroundImage: `url(${bgImg})` }}
             >
-              <div className="card w-full">
+              <div className="card w-full py-20">
                 <LoginForm
                   HandleLogin={HandleLogin}
                   HandleGithubSignin={HandleGithubSignin}
@@ -70,8 +79,8 @@ const Login = () => {
               </div>
             </div>
           </div>
-          <div className="text-center  lg:text-left  flex-1 bg-cyan-400">
-            <div className=" fixed  right-0  p-5">
+          <div data-aos="fade-left" className="text-center  lg:text-left   bg-cyan-400">
+            <div className=" sticky  right-0  p-5">
               <Link to="/">
                 <button className="text-lg rounded-full bg-white text-cyan-400 border-cyan-400 border w-12 h-12 hover:text-cyan-400 hover:bg-black flex justify-center items-center transition-all">
                   <FaLongArrowAltRight className="p-1 text-3xl" />
