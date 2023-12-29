@@ -7,14 +7,10 @@ import { FiEdit2 } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 const DragableTask = ({ task, refetch }) => {
-  // drag
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: "to-do",
-    item: { id: task.id, task },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  }));
+
+  function drag(ev) {
+    ev.dataTransfer.setData('text/plain', ev.target.id); 
+  }
 
   // delete
   const HandleDelete = (id) => {
@@ -28,13 +24,15 @@ const DragableTask = ({ task, refetch }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(`https://task-manager-alpha-bice.vercel.app/addTask/${id}`).then((res) => {
-          console.log(res.data);
-          if (res.data.deletedCount > 0) {
-            refetch();
-            toast.success("Task deleted successfully");
-          }
-        });
+        axios
+          .delete(`https://task-manager-alpha-bice.vercel.app/addTask/${id}`)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.deletedCount > 0) {
+              refetch();
+              toast.success("Task deleted successfully");
+            }
+          });
       } else {
         toast("Your task is safe");
       }
@@ -45,7 +43,7 @@ const DragableTask = ({ task, refetch }) => {
   const HandleEditClick = (id) => {
     document.getElementById(`my_modal_${id}`).showModal();
   };
-  // modal close 
+  // modal close
   const HandleModalClose = (id) => {
     document.getElementById(`my_modal_${id}`).close();
   };
@@ -73,11 +71,14 @@ const DragableTask = ({ task, refetch }) => {
 
   return (
     <>
-      <div ref={drag} className={`card `}>
+      <div
+        id={`${task._id}`}
+        draggable="true"
+        onDragStart={drag}
+        className={`card `}
+      >
         <div
-          className={`card-body p-5 rounded ${
-            isDragging ? "opacity-25" : "opacity-100"
-          } ${
+          className={`card-body p-5 rounded  ${
             task.priority == "low"
               ? "bg-red-300"
               : task.priority == "modarate"
@@ -91,11 +92,11 @@ const DragableTask = ({ task, refetch }) => {
               <div className="flex gap-2 justify-end items-center">
                 <FiEdit2
                   onClick={() => HandleEditClick(task._id)}
-                  className="cursor-pointer  "
+                  className="cursor-pointer"
                 />
                 <AiOutlineDelete
                   onClick={() => HandleDelete(task._id)}
-                  className="cursor-pointer "
+                  className="cursor-pointer"
                 />
               </div>
             </div>
@@ -110,12 +111,15 @@ const DragableTask = ({ task, refetch }) => {
         </div>
       </div>
       <dialog id={`my_modal_${task._id}`} className="modal">
-        
         <div className="modal-box  rounded bg-cyan-300">
-<div className="mb-10">
-<button  onClick={() => HandleModalClose(task._id)} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-
-</div>
+          <div className="mb-10">
+            <button
+              onClick={() => HandleModalClose(task._id)}
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </button>
+          </div>
           <form
             method="dialog"
             className=""
