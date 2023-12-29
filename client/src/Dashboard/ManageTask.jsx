@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect,  useState } from "react";
 import { AuthContext } from "../AuthProvider.jsx/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useDrag, useDrop } from "react-dnd";
 import DragableTask from "./DragableTask";
 import toast from "react-hot-toast";
 

@@ -1,6 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useDrag } from "react-dnd";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
