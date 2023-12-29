@@ -32,10 +32,7 @@ const ManageTask = () => {
     },
   });
 
-  // deadline find
-  const mostRecent = [...allTask].reverse().find((task) => {
-    return new Date(`${task.date}T${task.time}`) < new Date();
-  });
+
 
   // task filter by status
   useEffect(() => {
@@ -47,11 +44,13 @@ const ManageTask = () => {
       allTask?.filter((item) => item.status === "Completed") || []
     );
 
-    if(mostRecent){
-      console.log(mostRecent.title)
-      toast(`${mostRecent.title} deadline is end. Please delete the task.`);
-    }
-  }, [allTask,mostRecent]);
+      // deadline find
+  if(allTask){
+    const mostRecent = [...allTask].reverse().find((task) =>new Date(`${task.date}T${task.time}`) < new Date());
+    toast(`${mostRecent.title} deadline is end. Please delete the task.`);
+  }
+  
+  }, [allTask]);
 
 
 
